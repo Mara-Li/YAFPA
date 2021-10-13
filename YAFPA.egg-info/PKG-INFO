@@ -1,3 +1,14 @@
+Metadata-Version: 2.1
+Name: YAFPA
+Version: 1.3
+Summary: A script to share your obsidian vault (in partial way)
+Home-page: UNKNOWN
+Author: Mara-Li
+Author-email: mara-li@icloud.com
+License: MIT
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+
 **Table Of Content**
 - [Goal](#goal)
 - [Get Started](#get-started)
@@ -193,3 +204,4 @@ You can use :
 - [Customizable Sidebar](https://github.com/phibr0/obsidian-customizable-sidebar)
 - [Obsidian Customizable Menu](https://github.com/kzhovn/obsidian-customizable-menu)
 To have a button to share your file directly in Obsidian !
+

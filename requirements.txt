@@ -1,0 +1,4 @@
+python-dotenv~=0.19.1
+python-frontmatter~=1.0.0
+PyYAML~=5.4.1
+

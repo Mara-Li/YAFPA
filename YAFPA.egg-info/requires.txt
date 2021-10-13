@@ -1,0 +1,5 @@
+python-dotenv
+gitpython
+python-frontmatter
+pyYAML
+pyperclip
