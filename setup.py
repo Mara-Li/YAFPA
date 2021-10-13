@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setup(
     name="YAFPA",
-    version="1.3",
+    version="1.301",
     description="A script to share your obsidian vault (in partial way)",
     author="Mara-Li",
     author_email="mara-li@icloud.com",
@@ -20,6 +20,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_url="https://github.com/Mara-Li/YAFPA-python",
+    url="https://github.com/Mara-Li/YAFPA-python",
     entry_points={
         'console_scripts': ['yafpa=YAFPA.blog:main'],
         }
