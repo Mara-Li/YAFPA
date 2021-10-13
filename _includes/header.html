@@ -1,0 +1,114 @@
+
+<header>
+    <div class="dashboard disable-select">
+        <div class="site-heading profile-board-col">
+           <h4 class="medium"><a href="/">{{site.title}}</a></h4>
+        </div>
+        <div class="userboard profile-board-col">
+            <div class="username">
+                <p class="title-sans"><a href="/" style="text-decoration: none;">{{site.name}}</a></p>
+            </div>
+            <div class="userdesc">
+                <p class="title-sans">{{site.user_description}}</p>
+            </div> 
+
+        </div>
+    </div>
+    <div class="avatar disable-select" title="POUIC !">
+        <a class="avatar-link" href="/">
+            <img src="/assets/site/profile.png" class="avatar-img" alt="avatar"/>
+        </a>
+    </div>
+    <div class="main-site-subheader menu disable-select">
+        <div class="categories">
+            <a style="text-decoration: none;" href="/collection/">
+                <img src="/assets/site/folder.svg" class="icon-collection"
+                     width="32" height="32" viewBox="0 0 24 25" fill="none"
+                     xmlns="https://www.w3.org/2000/svg"/>
+            <p class="categories-p">Collections</p>
+            </a>
+        </div>
+		<div class="categories">
+		<a style="text-decoration: none;" href="/feed">
+			<!-- icon Author : https://www.flaticon.com/authors/freepik -->
+			<img src="/assets/site/open-book.svg" class="icon-category"
+                 width="32" height="32" viewBox="0 0 24 25" fill="none"
+                 xmlns="https://www.w3.org/2000/svg"/>
+		<p class="categories-p">Articles</p>
+		</a>
+        </div>
+
+        <div class="categories">
+            <a style="text-decoration: none;" href="/tags">
+				<!-- icon Author : https://www.flaticon.com/authors/smalllikeart -->
+				<img src="/assets/site/hashtag.png" class="icon-tags"
+                     width="32" height="32" viewBox="0 0 24 25" fill="none"
+                     xmlns="https://www.w3.org/2000/svg"/>
+            <p class="categories-p">Tags</p>
+            </a>
+        </div>
+        <div class="home">
+            <a style="text-decoration: none;" href="/about">
+				<!-- icon author : www.dariusdan.com -->
+                <img src="/assets/site/owl.svg" class="icon-home" width="32"
+                     height="32" viewBox="0 0 24 25" fill="none"
+                     xmlns="https://www.w3.org/2000/svg"/>
+                <p class="home-p">À propos</p>
+            </a>
+        </div>
+
+
+        
+
+    </div>
+    <div class="searchbar search-container">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <label for="search-input"></label>
+        <input type="text" oninput="changeResultContainerDisp(this.value)" id="search-input" autocomplete="off" placeholder="Search..."/>
+        <ul id="results-container"></ul>
+    </div>
+    <script src="/assets/js/simple-jekyll-search.min.js"></script>
+    <script>
+        function changeResultContainerDisp(val) {
+            if (val) {
+                document.getElementById("results-container").style.display = "block";
+                document.getElementById("search-input").addEventListener('blur', function() {
+                    document.addEventListener('click', function(event) {
+                        var isClickInside = document.getElementById("results-container").contains(event.target);
+                        if (!isClickInside) {
+                            document.getElementById("results-container").style.display = "none";
+                        }
+                    })
+                }) 
+            }  else {
+                document.getElementById("results-container").style.display = "none";
+            }
+        }
+        var sjs = SimpleJekyllSearch({
+                    searchInput: document.getElementById('search-input'),
+                    resultsContainer: document.getElementById('results-container'),
+                    json: '/search.json',
+                    searchResultTemplate: '<li class="search_res" style="list-style: none;"><a href="{{ site.url }}{url}" style="text-decoration: none; color: #555555;"><p style="font-size: 1.0rem; font-family: \'IBM Plex Sans\', Inter, \'Segoe UI\', Roboto, \'Helvetica Neue\', Arial, sans-serif; font-weight: 600;">{title}</p></a></li>',
+                    noResultsText: 'Aucun résultat',
+                    fuzzy: false,
+                    limit: 4,
+                    })
+    </script>
+    {%- if page.collection -%}
+        {%- assign link = "/" -%}
+        {%- if page.collection -%}
+            {%- assign link = "/" | append:page.collection -%}
+        {%- endif -%}
+    <div class="main-site-subheader disable-select" id="scroll-head"
+         onclick="window.location.assign('{{link}}');">
+        <div class="back-icon">
+            <svg class="ripple" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
+            </svg>
+        </div>
+        <p class="back-p">Accueil</p>
+    </div>
+    {%- endif -%}
+
+</header>

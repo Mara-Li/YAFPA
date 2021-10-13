@@ -1,0 +1,18 @@
+---
+---
+
+[
+  {% for note in site.documents %}
+    {% if note.collection != "private" %}
+    {
+
+      "title"    : "{{ note.title | strip_html | escape }}",
+      "url"      : "{{ note.url }}",
+      "category" : "{{note.categories | join: ', '}}",
+      "tags"     : "{{ note.tags | join: ', ' }}",
+      "content"  : {{ note.content | strip_html | strip_newline | strip | jsonify }}
+
+    } {% unless forloop.last %},{% endunless %}
+  {% endif %}
+  {% endfor %}
+]
