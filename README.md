@@ -15,7 +15,6 @@
     + [IOS Shortcuts](#ios-shortcuts)
     + [IOS](#ios)
     + [Obsidian](#obsidian)
-  * [Windows bonus](#windows-bonus)
 ---
   
 ⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.
