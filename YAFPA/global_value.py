@@ -15,14 +15,12 @@ env_path = Path(f"{base}/.YAFPA-env")
 if not os.path.isfile(env_path):
     settup.create_env()
 else:
-    try:
-        with open(env_path) as f:
-            components = f.read().splitlines()
-            for data in components:
-                vault = data.split("=")
-                if len(vault[1]) == 0:
-                    settup.create_env()
-    except PermissionError:
+    with open(env_path) as f:
+        components = f.read().splitlines()
+        for data in components:
+            vault = data.split("=")
+            if len(vault[1]) == 0:
+                settup.create_env()
 
 
 env = dotenv_values(env_path)
