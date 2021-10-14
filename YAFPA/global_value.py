@@ -17,10 +17,13 @@ if not os.path.isfile(env_path):
 else:
     with open(env_path) as f:
         components = f.read().splitlines()
-        for data in components:
-            vault = data.split("=")
-            if len(vault[1]) == 0:
-                settup.create_env()
+        if len(components) == 0:
+            settup.create_env()
+        else:
+            for data in components:
+                vault = data.split("=")
+                if len(data) == 0 or len(vault[1]) == 0 :
+                    settup.create_env()
 
 
 env = dotenv_values(env_path)
