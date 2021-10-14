@@ -187,8 +187,8 @@ You could also create an alias for sharing using `~/.profile`:
 You can integrate the script within obsidian using the nice plugin [Obsidian ShellCommands](https://github.com/Taitava/obsidian-shellcommands).
 
 You could create two commands :
-1. `share all` : `python3 path/to/your/script/sharing.py`
-2. `share one` : `python3 path/to/your/script/sharing.py --f {{file_path:absolute}}`
+1. `share all` : `yafpa`
+2. `share one` : `yafpa --f {{file_path:absolute}}`
 
 You can use :
 - [Customizable Sidebar](https://github.com/phibr0/obsidian-customizable-sidebar)
