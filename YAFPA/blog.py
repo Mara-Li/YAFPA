@@ -14,6 +14,17 @@ from . import convert_one as one
 from . import convert_all as all
 from . import setup_config as setup
 
+def mobile_shortcuts(file = "0"):
+    delopt = False
+    git = True
+    if file != "0":
+        if os.path.exists(file):
+            one.convert_one(file, delopt, git)
+        else:
+            all.convert_all(git=False)
+    else:
+        all.convert_all(git=False)
+
 
 def main():
     parser = argparse.ArgumentParser(
