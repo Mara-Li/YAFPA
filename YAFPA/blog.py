@@ -17,7 +17,9 @@ from . import setup_config as setup
 def mobile_shortcuts(file = "0"):
     delopt = False
     git = True
-    if file != "0":
+    if file == "--c":
+        setup.create_env()
+    elif file != "0":
         if os.path.exists(file):
             one.convert_one(file, delopt, git)
         else:
