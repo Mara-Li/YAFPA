@@ -6,8 +6,8 @@ import sys
 from dotenv import dotenv_values
 from . import setup_config as settup, blog
 
-base = os.getcwd()
-base= Path(base)
+base = Path.home()
+
 
 if not os.path.isfile(Path(f"{base}/.YAFPA-env")):
     settup.create_env()

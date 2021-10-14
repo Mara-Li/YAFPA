@@ -1,3 +1,5 @@
+⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.
+
 **Table Of Content**
 - [Goal](#goal)
 - [Get Started](#get-started)
@@ -12,13 +14,8 @@
     + [Custom CSS](#custom-CSS)
     + [Frontmatter settings](#frontmatter-settings)
     + [Admonition](#admonition)
-    + [IOS Shortcuts](#ios-shortcuts)
-    + [IOS](#ios)
     + [Obsidian](#obsidian)
 ---
-  
-⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.
-
 
 # Get Started
 
@@ -44,6 +41,8 @@ The first time you use the script, it will ask you three things :
 
 You can reconfig the path with `yafpa --config`
 
+The file will be created in `$HOME/.YAFPA-env` (`~/.YAFPA-env`)  so you can edit it directly. 
+
 # Script
 usage: yafpa [-h] [--preserve | --update] [--filepath FILEPATH] [--git] [--keep] [--config]
 
@@ -64,10 +63,10 @@ The script will convert all file with `share:true` and check if the contents
 are differents with the version in `_notes`. The only things that are 
 ignored is the contents of the metadata. If you want absolutely change the 
 metadata you can:
-- Use `share --file <filepath>` directly
+- Use `yafpa --file <filepath>` directly
 - Use `--u` to force update all file 
 - Continue to work on the file before pushing it.
-- Add a newline with `$~$` or `<br>` (it will be not converted and displayed on page / obsidian so...)
+- Add a newline
 - Manually delete the file 
 - Add or edit the metadata keys (unless `date`/`title`/`created`/`update`/`link`). 
 
@@ -78,13 +77,14 @@ The script will bug because **I don't check folder** (It's volontary). In this u
 
 ## Options
 ### Share all
-By adding, in the yaml of your file, the key `share: true`, you allow the script to publish the file. In fact, the script will read all the files in your vault before selecting the ones meeting the condition.
+`yafpa` and all `yafpa` option without `--F FILEPATH` will automatically read all file in your vault to check the `share: true` key in metadata (frontmatter YAML).
 
 By default, the script will check the difference between line [(*cf checking difference*)](README.md#checking-differences), and convert only the file with difference. You can use `--u` to force update. 
 
 ### Share only a file
+The command will be : `yafpa --F filepath`
 
-The file to be shared does not need to contain `share: true` in its YAML.
+The file to be shared does not need to contain `share: true` in its YAML, and will be updated no matter what.
 
 ## How it works
 
@@ -108,22 +108,22 @@ The script :
 
 Finally, the plugin will add, commit and push if supported.
 
-Note : The clipboard maybe not work in your configuration. I have (and can) only test the script on IOS and Windows, so I use `pyperclip` and `pasteboard` to do that. If you are on MacOS, Linux, Android, please, check your configuration on your python and open an issue if it doesn't work. 
+Note : The clipboard may not work in your configuration. I have (and can) only test the script on IOS and Windows, so I use `pyperclip` and `pasteboard` to do that. If you are on MacOS, Linux, Android, please, check your configuration on your python and open an issue if it doesn't work. 
 Note : I **can't** testing on these 3 OS, so I can't create a clipboard option on my own. 
 
 ### Custom CSS 
-You can add CSS using the file (custom.css)[/assets/css/custom.css]. The plugin [Markdown Attribute](https://github.com/valentine195/obsidian-markdown-attributes) allow to use the creation of inline css. 
+You can add CSS using the file (custom.css)[https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/assets/css/custom.css]. The plugin [Markdown Attribute](https://github.com/valentine195/obsidian-markdown-attributes) allow to use the creation of inline css. 
 Some information about this :
 - You need to add `:` after the first `{`
 - The inline IAL work only if there is stylized markdown. In absence, the text will be bolded. 
 - It won't work with highlight (removed automatically by the script)
-
-:warning: As I use CodeMirror Options and Contextual Typography, I warn you : the use of `#tags` to stylize the text before it doesn't work with my build. So, as an option to don't have a random tag in a text, you can use `custom.css` to remove it with `display: none` (you can have an example with `#left`). 
+ 
+⚠️ As I use CodeMirror Options and Contextual Typography, I warn you : the use of `#tags` to stylize the text before it doesn't work with my build. So, as an option to don't have a random tag in a text, you can use `custom.css` to remove it with `display: none` (you can have an example with `#left`). 
 
 ### Frontmatter settings
 - `share: true` : Share the file
 - `embed: false` : remove the transluction (convert to normal wikilinks)
-- `update: false` : Don't update the file at all. 
+- `update: false` : Don't update the file at all after the first push
 - `current: false` : Don't update the date
 - `private: true` : Use the `_private` folder collection instead of the `_notes` collection.
 
@@ -137,13 +137,14 @@ The script will :
 
 JavaScript will niced all things.
 
-⚠ As always with markdown, you will see some problem with new paragraph inside admonition. You can use `$~$` to fake line. The script will automatically add this.
+⚠️ As always with markdown, you will see some problem with new paragraph inside admonition. You can use `$~$` to fake line. The script will automatically add this.
 Also, you can add emoji on title to add some nice formatting.
 
+⚠️ Depeciated, need to be updated
+
+<details>
+  <summary> Depreciated ! Please don't use it. </summary>
 ### IOS Shortcuts
-
-:warning: DEPRECIATED BECAUSE I MOVE THE SCRIPT ! NEED TO BE UPDATED DONT USE IT PLEASE
-
 ### IOS
 To use the shortcuts, you need : 
 - [Pyto](https://apps.apple.com/fr/app/pyto-python-3/id1436650069)
@@ -151,10 +152,10 @@ To use the shortcuts, you need :
 - [Working Copy](https://workingcopyapp.com/)
 
 The main shortcut is on RoutineHub (more pratical for version update) : [share one file](https://routinehub.co/shortcut/10044/)
-(it's equivalent to `share <filepath>`)
+(it's equivalent to `yafpa --f <filepath>`)
 
 There is another shortcuts to "share all" files : [Share all true file in vault](https://routinehub.co/shortcut/10045/)
-(it's equivalent to `share` without arguments)
+(it's equivalent to `yafpa` without arguments)
 
 Note : You first need to clone the repo with Working Copy and install all requirements. 
 
@@ -179,6 +180,7 @@ python3 <vault-path>/script/sharing.py <file>
 
 You could also create an alias for sharing using `~/.profile`: 
 `alias share='python3 <git-folder>/script/sharing.py'`
+</details>
 
 ### Obsidian 
 → Please use Wikilinks with "short links" (I BEG YOU)
