@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setup(
     name="YAFPA",
-    version="1.48",
+    version="1.49.5",
     description="A script to share your obsidian vault (in partial way)",
     author="Mara-Li",
     author_email="mara-li@icloud.com",

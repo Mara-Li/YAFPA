@@ -2,7 +2,7 @@ import sys
 import os
 from pathlib import Path
 
-BASEDIR = os.getcwd()
+BASEDIR = Path.home()
 BASEDIR= Path(BASEDIR)
 env_path = Path(f"{BASEDIR}/.YAFPA-env")
 
