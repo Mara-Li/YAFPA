@@ -3,23 +3,25 @@ from datetime import datetime
 from pathlib import Path
 import sys
 
+import env as env
 from dotenv import dotenv_values
 from . import setup_config as settup, blog
 
-base = Path.home()
+base = os.getcwd()
+base= Path(base)
+env_path = Path(f"{base}/.YAFPA-env")
 
-
-if not os.path.isfile(Path(f"{base}/.YAFPA-env")):
+if not os.path.isfile(env_path):
     settup.create_env()
 else:
-    with open(Path(f"{base}/.YAFPA-env")) as f:
+    with open(env_path) as f:
         components = f.read().splitlines()
         for data in components:
             vault = data.split("=")
             if len(vault[1]) == 0:
                 settup.create_env()
 
-env = dotenv_values(Path(f"{base}/.YAFPA-env"))
+env = dotenv_values(env_path)
 
 # Seems to have problem with dotenv with pyto on IOS 15
 try:
@@ -27,7 +29,7 @@ try:
     vault = Path(env["vault"])
     web = env["blog"]
 except KeyError:
-    with open(Path(f"{base}/.env")) as f:
+    with open(env_path) as f:
         vault = "".join(f.readlines(1)).replace("vault=", "")
         BASEDIR = "".join(f.readlines(2)).replace("blog_path=", "")
         web = "".join(f.readlines(3)).replace("blog=", "")
