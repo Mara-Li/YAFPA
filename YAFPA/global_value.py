@@ -7,17 +7,23 @@ from dotenv import dotenv_values
 from . import setup_config as settup
 
 base = Path.home()
+
+if not os.access(base, os.W_OK):
+    base= os.getcwd()
 env_path = Path(f"{base}/.YAFPA-env")
 
 if not os.path.isfile(env_path):
     settup.create_env()
 else:
-    with open(env_path) as f:
-        components = f.read().splitlines()
-        for data in components:
-            vault = data.split("=")
-            if len(vault[1]) == 0:
-                settup.create_env()
+    try:
+        with open(env_path) as f:
+            components = f.read().splitlines()
+            for data in components:
+                vault = data.split("=")
+                if len(vault[1]) == 0:
+                    settup.create_env()
+    except PermissionError:
+
 
 env = dotenv_values(env_path)
 

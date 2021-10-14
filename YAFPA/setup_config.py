@@ -1,7 +1,10 @@
 from pathlib import Path
+import os
 
 BASEDIR = Path.home()
-BASEDIR = Path(BASEDIR)
+
+if not os.access(BASEDIR, os.W_OK):
+    BASEDIR= os.getcwd()
 env_path = Path(f"{BASEDIR}/.YAFPA-env")
 
 
