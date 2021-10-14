@@ -140,25 +140,47 @@ JavaScript will niced all things.
 ⚠️ As always with markdown, you will see some problem with new paragraph inside admonition. You can use `$~$` to fake line. The script will automatically add this.
 Also, you can add emoji on title to add some nice formatting.
 
-⚠️ Depeciated, need to be updated
-
-<details>
-  <summary> Depreciated ! Please don't use it. </summary>
 ### IOS Shortcuts
-### IOS
+
+You need to found the path of your vault and the blog in your phone. To achieve that, I use [a-shell](https://holzschu.github.io/a-Shell_iOS/). 
+
+First, in a-shell, run `pickFolder` and choose the folder of your vault, and rerun `pickFolder` to choose the folder where are the blog data (you need to clone with [Working Copy](https://workingcopyapp.com/))
+After, do `showmarks` and copy the two path in any note app. Check if the path is not broken because of the paste!
+
+Here is a blank sheet to help you if you want to manually write / edit it :
+```
+vault=
+blog_path=
+blog=
+```
+With :
+- `vault`: Vault Absolute Path
+- `blog_path` : Blog repository absolute path
+- `blog` : Blog link
+
+
+### Pyto shortcuts
 To use the shortcuts, you need : 
 - [Pyto](https://apps.apple.com/fr/app/pyto-python-3/id1436650069)
 - [Toolbox Pro](https://apps.apple.com/fr/app/toolbox-pro-for-shortcuts/id1476205977)
-- [Working Copy](https://workingcopyapp.com/)
 
-The main shortcut is on RoutineHub (more pratical for version update) : [share one file](https://routinehub.co/shortcut/10044/)
-(it's equivalent to `yafpa --f <filepath>`)
+:warning: You need to install YAFPA via pip, and configure it with `yafpa --config` (in module run) or, using repl :
+```python
+from YAFPA import blog
+blog.mobile_shortcuts("--c")
+``` 
 
-There is another shortcuts to "share all" files : [Share all true file in vault](https://routinehub.co/shortcut/10045/)
-(it's equivalent to `yafpa` without arguments)
+The config file is stored in the **pyto folder**. You can directly change the file using textastic or a-shell. 
 
-Note : You first need to clone the repo with Working Copy and install all requirements. 
+The main shortcut is on RoutineHub (more practical for version update) : [share one file](https://routinehub.co/shortcut/10044/)
+(it's equivalent to `share <filepath>`)
 
+There are another shortcut to "share all" files : [Share all true file in vault](https://routinehub.co/shortcut/10045/)
+(it's equivalent to `share` without arguments)
+
+
+### a-shell
+:warning: For the moment, I can't update this shortcuts, because of a bug. 
 
 To use the [shortcuts](https://routinehub.co/shortcut/10151/), you need :
 - [a-shell](https://holzschu.github.io/a-Shell_iOS/) (Free)
@@ -166,21 +188,19 @@ To use the [shortcuts](https://routinehub.co/shortcut/10151/), you need :
 
 Before running the shortcuts, you need to install all requirements, aka :
 ```
-jump <vault>
-cd script
-pip install -r requirements.txt
+pip install yafpa
 ```
 
-
-For the moment I can't create a shortcuts to share only one file BUT ! You can using `a-shell` as you do in a normal terminal, aka : 
+For the moment I can't create a shortcut to share only one file, BUT! You can use `a-shell` as you do in a normal terminal, aka : 
 ```
 jump <vault>
-python3 <vault-path>/script/sharing.py <file>
+yafpa --f <file>
 ```
 
-You could also create an alias for sharing using `~/.profile`: 
-`alias share='python3 <git-folder>/script/sharing.py'`
-</details>
+To run the script for all your file, run `yafpa`.
+
+Note : Compared to pyto, the script cannot work with `$HOME`, so the `.YAFPA-env` will be created in the folder you use to run it. It is also possible to use multiple folder, but you need to create the file for each. The better is to have one in the vault ; and one in the default folder of a-shell. 
+
 
 ### Obsidian 
 → Please use Wikilinks with "short links" (I BEG YOU)
@@ -194,3 +214,19 @@ You can use :
 - [Customizable Sidebar](https://github.com/phibr0/obsidian-customizable-sidebar)
 - [Obsidian Customizable Menu](https://github.com/kzhovn/obsidian-customizable-menu)
 To have a button to share your file directly in Obsidian !
+
+#### Template frontmatter
+→ The • indicate that this value is optional
+```yaml
+title: My files•
+date: 12-11-2021•
+embed: true•
+update: true•
+current: true•
+folder: notes•
+flux: true•
+share: false 
+category: Notes
+description: my awesome file
+```
+You can use MetaEdit / Supercharged links to quickly update the front matter. 
