@@ -1,13 +1,12 @@
 import os
 from datetime import datetime
 from pathlib import Path
-import sys
 
-import env as env
 from dotenv import dotenv_values
-from . import setup_config as settup, blog
 
-base =  Path.home()
+from . import setup_config as settup
+
+base = Path.home()
 env_path = Path(f"{base}/.YAFPA-env")
 
 if not os.path.isfile(env_path):
@@ -32,8 +31,8 @@ except KeyError:
         vault = "".join(f.readlines(1)).replace("vault=", "")
         BASEDIR = "".join(f.readlines(2)).replace("blog_path=", "")
         web = "".join(f.readlines(3)).replace("blog=", "")
-    if len(vault ) == 0 or len(web) == 0 or len(web)==0:
-        print('Please provide the good path for all folder')
+    if len(vault) == 0 or len(web) == 0 or len(web) == 0:
+        print("Please provide the good path for all folder")
         exit(1)
 path = Path(f"{BASEDIR}/.git")  # GIT SHARED
 post = Path(f"{BASEDIR}/_notes")

@@ -3,7 +3,6 @@ from datetime import datetime
 
 import frontmatter
 
-
 from . import conversion as convert
 from . import file_checking as checkFile
 from . import global_value as gl

@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+
 try:
     sys.stdin.reconfigure(encoding="utf-8")
     sys.stdout.reconfigure(encoding="utf-8")
@@ -12,6 +13,7 @@ from . import file_checking as check
 from . import convert_one as one
 from . import convert_all as all
 from . import setup_config as setup
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -50,11 +52,8 @@ def main():
         action="store_true",
     )
     parser.add_argument(
-        "--config",
-        "--c",
-        help="Edit the config file",
-        action="store_true"
-        )
+        "--config", "--c", help="Edit the config file", action="store_true"
+    )
     args = parser.parse_args()
     ori = args.filepath
     delopt = False
