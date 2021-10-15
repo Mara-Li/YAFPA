@@ -1,12 +1,13 @@
-⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.
+**This script is intended to be used with [YAFPA](https://github.com/Mara-Li/yet-another-free-publish-alternative), a free way to share your obsidian vault**.
+
+*⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.*
 
 **Table Of Content**
 - [Goal](#goal)
 - [Get Started](#get-started)
-  * [Requirements](#requirements)
-  * [Environment](#environment)
 - [Script](#script)
   * [Checking differences](#checking-differences)
+  * [Limitations](#limitations)
   * [Options](#options)
     + [Share all](#share-all)
     + [Share only a file](#share-only-a-file)
@@ -21,18 +22,6 @@
 
 - You first need to create a template using [YAFPA-blog](https://github.com/Mara-Li/yet-another-free-publish-alternative)
 - After, do `pip install YAFPA`
-
-## Requirements
-
-The script uses : 
-- [PyGithub](https://github.com/PyGithub/PyGithub)
-- [Python-dotenv](https://github.com/theskumar/python-dotenv)
-- [python-frontmatter](https://github.com/eyeseast/python-frontmatter)
-- [Pyperclip](https://github.com/asweigart/pyperclip) on Windows/MacOS/Linux | IOS : Pasteboard (Pyto) or clipboard (Pythonista) | Clipboard function doesn't work (yet) on a-shell.
-
-You can install all with `pip install -r requirements.txt`
-
-## Environment
 
 The first time you use the script, it will ask you three things :
 - Your vault path (absolute path !)
@@ -68,12 +57,18 @@ metadata you can:
 - Continue to work on the file before pushing it.
 - Add a newline
 - Manually delete the file 
-- Add or edit the metadata keys (unless `date`/`title`/`created`/`update`/`link`). 
+- Add or edit the metadata keys (unless `date`/`title`/`created`/`update`/`link`).
 
-:warning: In case you have two files with the same name but :
+⚠️ As always with git, you can repost the exact same file that already exists on the server. 
+
+## Limitations
+
+⚠️ In case you have two files with the same name but :
 - In different folder
-- With different sharing statut
+- With different sharing statut or folder
 The script will bug because **I don't check folder** (It's volontary). In this unique case, you need to rename one of the files. 
+
+- In the same way, in case you change the folder key in the metadata, you will have two identic file in different folder. 
 
 ## Options
 ### Share all
@@ -125,8 +120,7 @@ Some information about this :
 - `embed: false` : remove the transluction (convert to normal wikilinks)
 - `update: false` : Don't update the file at all after the first push
 - `current: false` : Don't update the date
-- `private: true` : Use the `_private` folder collection instead of the `_notes` collection.
-
+- `folder` : Use a different folder than `_note` ([here some more information](https://github.com/Mara-Li/yet-another-free-publish-alternative#folder-options)) 
 
 ### Admonition 
 As admonition is very tricky, I choose to convert all admonition to a "callout Notion".
@@ -164,7 +158,7 @@ To use the shortcuts, you need :
 - [Pyto](https://apps.apple.com/fr/app/pyto-python-3/id1436650069)
 - [Toolbox Pro](https://apps.apple.com/fr/app/toolbox-pro-for-shortcuts/id1476205977)
 
-:warning: You need to install YAFPA via pip, and configure it with `yafpa --config` (in module run) or, using repl :
+⚠️ You need to install YAFPA via pip, and configure it with `yafpa --config` (in module run) or, using repl :
 ```python
 from YAFPA import blog
 blog.mobile_shortcuts("--c")
@@ -180,7 +174,7 @@ There are another shortcut to "share all" files : [Share all true file in vault]
 
 
 ### a-shell
-:warning: For the moment, I can't update this shortcuts, because of a bug. 
+⚠️ For the moment, I can't update this shortcuts, because of a bug. 
 
 To use the [shortcuts](https://routinehub.co/shortcut/10151/), you need :
 - [a-shell](https://holzschu.github.io/a-Shell_iOS/) (Free)
@@ -230,3 +224,4 @@ category: Notes
 description: my awesome file
 ```
 You can use MetaEdit / Supercharged links to quickly update the front matter. 
+
