@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 from datetime import datetime
 
 import frontmatter
@@ -8,6 +7,7 @@ from . import conversion as convert
 from . import file_checking as checkFile
 from . import global_value as gl
 
+
 def convert_one(ori, delopt, git):
     file_name = os.path.basename(ori).upper()
     yaml_front = frontmatter.load(ori)
@@ -15,8 +15,6 @@ def convert_one(ori, delopt, git):
     if "folder" in yaml_front.keys():
         priv = yaml_front["folder"]
         priv = checkFile.check_folder(priv)
-    else:
-        priv = Path(f"{gl.BASEDIR}/{priv}")
     if delopt is False:
         print(
             f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [{file_name}] OPTIONS :\n- UPDATE "

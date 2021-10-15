@@ -12,8 +12,9 @@ vault = settings.vault
 
 
 def check_folder(folder_key):
-    folder_key = folder_key.replace('_', '')
     path = Path(f"{BASEDIR}/_{folder_key}")
+    print(path)
+    print(post)
     if os.path.isdir(path):
         return path
     else:
