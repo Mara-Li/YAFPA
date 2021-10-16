@@ -3,26 +3,11 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/YAFPA)
 ![PyPI - Status](https://img.shields.io/pypi/status/YAFPA)
 ![](https://img.shields.io/badge/Auxiliary%20Tool-Obsidian-blueviolet)
+[![Yet Another Publish Alternative](https://img.shields.io/badge/Github-YAFPA-success)](https://github.com/Mara-Li/yet-another-free-publish-alternative)
 
 **This script is intended to be used with [YAFPA](https://github.com/Mara-Li/yet-another-free-publish-alternative), a free way to share your obsidian vault**.
 
 *⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.*
-
-**Table Of Content**
-- [Goal](#goal)
-- [Get Started](#get-started)
-- [Script](#script)
-  * [Checking differences](#checking-differences)
-  * [Limitations](#limitations)
-  * [Options](#options)
-    + [Share all](#share-all)
-    + [Share only a file](#share-only-a-file)
-  * [How it works](#how-it-works)
-    + [Custom CSS](#custom-CSS)
-    + [Frontmatter settings](#frontmatter-settings)
-    + [Admonition](#admonition)
-    + [Obsidian](#obsidian)
----
 
 # Get Started
 
