@@ -1,3 +1,9 @@
+[![GitHub license](https://img.shields.io/github/license/Mara-Li/YAFPA-python)](https://github.com/Mara-Li/YAFPA-python)
+![PyPI](https://img.shields.io/pypi/v/YAFPA)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/YAFPA)
+![PyPI - Status](https://img.shields.io/pypi/status/YAFPA)
+![](https://img.shields.io/badge/Auxiliary%20Tool-Obsidian-blueviolet)
+
 **This script is intended to be used with [YAFPA](https://github.com/Mara-Li/yet-another-free-publish-alternative), a free way to share your obsidian vault**.
 
 *⚠️ The script and site are not a replacement for [Obsidian Publish](https://obsidian.md/publish), which is a much more efficient way to share Obsidian files.*
