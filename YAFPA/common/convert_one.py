@@ -8,6 +8,7 @@ from . import conversion as convert
 from . import file_checking as checkFile
 from . import global_value as gl
 
+
 def convert_one(ori, delopt, git):
     file_name = os.path.basename(ori).upper()
     yaml_front = frontmatter.load(ori)

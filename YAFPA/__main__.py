@@ -8,13 +8,12 @@ try:
 except AttributeError:
     pass
 
+from common import convert_one as one
+from common import convert_all as all
+from common import setup_config as setup, file_checking as check
 
-from . import file_checking as check
-from . import convert_one as one
-from . import convert_all as all
-from . import setup_config as setup
 
-def mobile_shortcuts(file = "0"):
+def mobile_shortcuts(file="0"):
     delopt = False
     git = True
     if file == "--c":
@@ -90,3 +89,7 @@ def main():
             return
     else:
         all.convert_all(delopt, ng, force, stop_share)
+
+
+if __name__ == "__main__":
+    main()

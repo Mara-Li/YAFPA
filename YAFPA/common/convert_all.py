@@ -68,7 +68,7 @@ def search_share(option=0, stop_share=1):
                                 contents = convert.file_convert(filepath, folder)
                                 check = convert.file_write(filepath, contents, folder)
                             else:
-                                check = False
+                                check = convert.file_write(filepath, "0", folder)
                         if option == 2:
                             checkFile.delete_file(filepath, folder)
                             contents = convert.file_convert(filepath, folder)

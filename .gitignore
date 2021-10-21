@@ -11,7 +11,7 @@ vendor
 
 test.py
 
-script/obsidian-share/cogs/__pycache__/
+YAFPA/obsidian-share/cogs/__pycache__/
 dist/*
 venv/*
 YAFPA.egg-info/*

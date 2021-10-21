@@ -200,23 +200,3 @@ def file_convert(file, folder, option=0):
 
     else:
         return final
-
-
-def file_write(file, contents, folder):
-    file_name = os.path.basename(file)
-    if contents == "":
-        return False
-    else:
-        path = Path(f"{folder}/{file_name}")
-        if not os.path.exists(path):
-            new_notes = open(path, "w", encoding="utf-8")
-            for line in contents:
-                new_notes.write(line)
-            new_notes.close()
-            mt.frontmatter_check(file_name, folder)
-            return True
-        else:
-            meta = frontmatter.load(file)
-            if not meta["share"] or meta["share"] == False:
-                check.delete_file(file, folder)
-            return False

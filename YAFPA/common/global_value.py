@@ -9,7 +9,7 @@ from . import setup_config as settup
 base = Path.home()
 
 if not os.access(base, os.W_OK):
-    base= os.getcwd()
+    base = os.getcwd()
 env_path = Path(f"{base}/.YAFPA-env")
 
 if not os.path.isfile(env_path):
@@ -22,7 +22,7 @@ else:
         else:
             for data in components:
                 vault = data.split("=")
-                if len(data) == 0 or len(vault[1]) == 0 :
+                if len(data) == 0 or len(vault[1]) == 0:
                     settup.create_env()
 
 

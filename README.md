@@ -150,9 +150,12 @@ To use the shortcuts, you need :
 - [Toolbox Pro](https://apps.apple.com/fr/app/toolbox-pro-for-shortcuts/id1476205977)
 
 ⚠️ You need to install YAFPA via pip, and configure it with `yafpa --config` (in module run) or, using repl :
+
 ```python
-from YAFPA import blog
-blog.mobile_shortcuts("--c")
+
+from YAFPA import __main__
+
+__main__.mobile_shortcuts("--c")
 ``` 
 
 The config file is stored in the **pyto folder**. You can directly change the file using textastic or a-shell. 

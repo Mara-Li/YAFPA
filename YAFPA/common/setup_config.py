@@ -4,7 +4,7 @@ import os
 BASEDIR = Path.home()
 
 if not os.access(BASEDIR, os.W_OK):
-    BASEDIR= os.getcwd()
+    BASEDIR = os.getcwd()
 env_path = Path(f"{BASEDIR}/.YAFPA-env")
 
 
