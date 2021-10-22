@@ -76,7 +76,6 @@ def search_share(option=0, stop_share=1):
                             filespush.append(f"Added : {os.path.basename(destination).replace('md', '')} in {folder}")
                     else:
                         if stop_share == 1:
-                            mt.update_frontmatter(filepath, folder, 0, 0)
                             if checkFile.delete_file(filepath, folder):
                                 destination = checkFile.dest(filepath, folder)
                                 filespush.append(f"Removed : {os.path.basename(destination).replace('md', '')} from {folder}")
@@ -112,7 +111,6 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
             f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- UPDATE MODIFIED FILES"
         )
         new_files, priv = search_share(1, stop_share)
-    commit = "Updated :\n"
     if len(new_files) > 0:
         add=""
         rm = ""

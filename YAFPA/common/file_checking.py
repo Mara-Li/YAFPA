@@ -5,6 +5,7 @@ from pathlib import Path
 import frontmatter
 
 from YAFPA.common import global_value as settings
+from YAFPA.common import metadata as mt
 
 BASEDIR = settings.BASEDIR
 post = settings.post
@@ -40,6 +41,7 @@ def delete_file(filepath, folder):
         filecheck = os.path.basename(file)
         if filecheck == filepath:
             os.remove(Path(f"{path}/{file}"))
+            mt.update_frontmatter(filepath, folder, 0, 0)
             return True
     return False
 
