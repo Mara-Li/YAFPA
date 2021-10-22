@@ -1,15 +1,15 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setup(
     name="yafpa",
     python_requires=">=3.7",
-    version="1.51.9",
+    version="1.51.91",
     description="A script to share your obsidian vault (in partial way)",
     author="Mara-Li",
     author_email="mara-li@icloud.com",
-    packages=["YAFPA"],
+    packages=find_packages(),
     install_requires=[
         "python-dotenv",
         "gitpython",

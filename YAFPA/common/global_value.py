@@ -4,7 +4,7 @@ from pathlib import Path
 
 from dotenv import dotenv_values
 
-from . import setup_config as settup
+from YAFPA.common import setup_config as settup
 
 base = Path.home()
 

@@ -5,10 +5,8 @@ from pathlib import Path
 import frontmatter
 import yaml
 
-from . import conversion as convert
-from . import file_checking as checkFile
-from . import global_value
-from . import metadata as mt
+from YAFPA.common import file_checking as checkFile, conversion as convert, metadata as mt
+from YAFPA.common import global_value
 
 BASEDIR = global_value.BASEDIR
 vault = global_value.vault
@@ -69,16 +67,20 @@ def search_share(option=0, stop_share=1):
                                 check = convert.file_write(filepath, contents, folder)
                             else:
                                 check = convert.file_write(filepath, "0", folder)
-                        if option == 2:
+                        elif option == 2:
                             checkFile.delete_file(filepath, folder)
                             contents = convert.file_convert(filepath, folder)
                             check = convert.file_write(filepath, contents, folder)
                         destination = checkFile.dest(filepath, folder)
                         if check:
-                            filespush.append(destination)
+                            filespush.append(f"Added : {os.path.basename(destination).replace('md', '')} in {folder}")
                     else:
                         if stop_share == 1:
-                            checkFile.delete_file(filepath, folder)
+                            mt.update_frontmatter(filepath, folder, 0, 0)
+                            if checkFile.delete_file(filepath, folder):
+                                destination = checkFile.dest(filepath, folder)
+                                filespush.append(f"Removed : {os.path.basename(destination).replace('md', '')} from {folder}")
+
                 except (
                     yaml.scanner.ScannerError,
                     yaml.constructor.ConstructorError,
@@ -86,6 +88,7 @@ def search_share(option=0, stop_share=1):
                     pass
 
     return filespush, folder
+
 
 
 def convert_all(delopt=False, git=False, force=False, stop_share=0):
@@ -109,18 +112,24 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
             f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- UPDATE MODIFIED FILES"
         )
         new_files, priv = search_share(1, stop_share)
-    commit = "Add to blog:\n"
+    commit = "Updated :\n"
     if len(new_files) > 0:
+        add=""
+        rm = ""
         for md in new_files:
-            commit = commit + "\n - " + md
+            if "removed" in md.lower():
+                rm = rm + "\n - " +  md.replace('Removed : ', '')
+            elif "added" in md.lower():
+                add = add + "\n - " + md.replace('Added : ', '')
+        commit = f" 🎉 Added to blog : {add}\n\n 🗑️ Removed from blog : {rm}"
         if git is False:
             if len(new_files) == 1:
                 md = "".join(new_files)
                 commit = md
                 convert.clipboard(md, priv)
-            commit = f"Add to blog: \n {commit}"
+            commit = f"Updated : \n {commit}"
             global_value.git_push(commit)
         else:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] 🎉 {commit}")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] {commit}")
     else:
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] File already exists 😶")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] No modification 😶")

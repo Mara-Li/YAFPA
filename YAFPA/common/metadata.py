@@ -5,7 +5,7 @@ from pathlib import Path
 
 import frontmatter
 
-from . import global_value as settings
+from YAFPA.common import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
 web = settings.web
@@ -48,7 +48,7 @@ def frontmatter_check(filename, folder):
     return
 
 
-def update_frontmatter(file, folder, share=0):
+def update_frontmatter(file, folder, share=0, link=1):
     metadata = open(file, "r", encoding="utf8")
     meta = frontmatter.load(metadata)
     metadata.close()
@@ -71,10 +71,10 @@ def update_frontmatter(file, folder, share=0):
         meta["link"] = clip
         update = frontmatter.dumps(meta, sort_keys=False)
         meta = frontmatter.loads(update)
-        if share == 1 and ("share" not in meta.keys() or meta["share"] == "false"):
+        if link != 1:
+            meta.metadata.pop("link", None)
+        elif link ==1 and share == 1 and ("share" not in meta.keys() or meta["share"] == "false"):
             meta["share"] = "true"
-            update = frontmatter.dumps(meta, sort_keys=False)
-            meta = frontmatter.loads(update)
         if tag != "":
             meta["tag"] = tag
         update = frontmatter.dumps(meta, sort_keys=False)

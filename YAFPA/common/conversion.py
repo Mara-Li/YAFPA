@@ -5,11 +5,8 @@ from pathlib import Path
 
 import frontmatter
 
-from . import admonition as adm
-from . import file_checking as check
-from . import global_value as settings
-from . import image_transform as links
-from . import metadata as mt
+from YAFPA.common import file_checking as check, image_transform as links, admonition as adm, metadata as mt
+from YAFPA.common import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
 vault = Path(settings.vault)

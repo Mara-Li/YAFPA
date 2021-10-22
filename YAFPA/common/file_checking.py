@@ -4,7 +4,7 @@ from pathlib import Path
 
 import frontmatter
 
-from . import global_value as settings
+from YAFPA.common import global_value as settings
 
 BASEDIR = settings.BASEDIR
 post = settings.post
