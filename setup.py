@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
-__version__ = "1.53.0"
+version = "1.52.0"
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 setup(
     name="yafpa",
     python_requires=">=3.7",
-    version=__version__,
+    version=version,
     description="A script to share your obsidian vault (in partial way)",
     author="Mara-Li",
     author_email="mara-li@icloud.com",
