@@ -1,4 +1,2 @@
 [tool.semantic_release]
-version_variable = [
-    "setup.py:__version__"
-]
+version_variable ='setup.py:version'
