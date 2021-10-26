@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.52.2 (2021-10-26)
+### Fix
+* :ambulance: Fix parsing bug with Jekyll with link (convert https link to markdown normal links) ([`db59c47`](https://github.com/Mara-Li/YAFPA-python/commit/db59c47e2bfc5b601264a0de013a29aebdd5c7ab))
+
 ## v1.52.1 (2021-10-26)
 ### Feature
 * **gitignore:** :see_no_evil: Update gitignore ([`b652ae3`](https://github.com/Mara-Li/YAFPA-python/commit/b652ae3796ce3ea2fcdee6ce28341ca95a93d5b0))
