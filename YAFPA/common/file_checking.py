@@ -37,9 +37,9 @@ def retro(filepath, opt=0):
 def delete_file(filepath, folder):
     path = Path(folder)
     for file in os.listdir(path):
-        filepath = os.path.basename(filepath)
+        filename = os.path.basename(filepath)
         filecheck = os.path.basename(file)
-        if filecheck == filepath:
+        if filecheck == filename:
             os.remove(Path(f"{path}/{file}"))
             mt.update_frontmatter(filepath, folder, 0, 0)
             return True

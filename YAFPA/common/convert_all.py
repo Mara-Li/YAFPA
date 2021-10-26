@@ -73,12 +73,12 @@ def search_share(option=0, stop_share=1):
                             check = convert.file_write(filepath, contents, folder)
                         destination = checkFile.dest(filepath, folder)
                         if check:
-                            filespush.append(f"Added : {os.path.basename(destination).replace('md', '')} in {folder}")
+                            filespush.append(f"Added : {os.path.basename(destination).replace('.md', '')} in {folder}")
                     else:
                         if stop_share == 1:
                             if checkFile.delete_file(filepath, folder):
                                 destination = checkFile.dest(filepath, folder)
-                                filespush.append(f"Removed : {os.path.basename(destination).replace('md', '')} from {folder}")
+                                filespush.append(f"Removed : {os.path.basename(destination).replace('.md', '')} from {folder}")
 
                 except (
                     yaml.scanner.ScannerError,
@@ -119,7 +119,11 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
                 rm = rm + "\n - " +  md.replace('Removed : ', '')
             elif "added" in md.lower():
                 add = add + "\n - " + md.replace('Added : ', '')
-        commit = f" 🎉 Added to blog : {add}\n\n 🗑️ Removed from blog : {rm}"
+        if len(rm) > 0:
+            rm = f"🗑️ Removed from blog : {rm}"
+        if len(add) > 0:
+            add = f" 🎉 Added to blog : {add}\n\n"
+        commit = add + rm
         if git is False:
             if len(new_files) == 1:
                 md = "".join(new_files)
