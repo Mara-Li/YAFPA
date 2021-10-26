@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch_depth: 0
+        fetch-depth: 0
     - name: Python Semantic Release
       uses: relekang/python-semantic-release@master
       with:
