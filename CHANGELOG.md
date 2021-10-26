@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v1.53.5 (2021-10-26)
+
+
 ## v1.53.4 (2021-10-26)
 ### Feature
 * **gitignore:** :see_no_evil: Update gitignore ([`b652ae3`](https://github.com/Mara-Li/YAFPA-python/commit/b652ae3796ce3ea2fcdee6ce28341ca95a93d5b0))
