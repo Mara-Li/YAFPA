@@ -103,6 +103,10 @@ def convert_to_wikilink(line):
             links = links[0]
             if not re.search("https?:\/\/", links):
                 line = transform_link(line, links)
+    elif re.search("https?:\/\/", final_text):
+        link = re.search("https?:\/\/.*", final_text) #solo link fix jekyll liquid
+        link = link.group()
+        line = line.replace(link, f"[{link.strip()}]({link.strip()})")
     return line
 
 

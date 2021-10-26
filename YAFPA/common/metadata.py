@@ -23,9 +23,6 @@ def remove_frontmatter(meta):
 def frontmatter_check(filename, folder):
     metadata = open(Path(f"{folder}/{filename}"), "r", encoding="utf-8")
     meta = frontmatter.load(metadata)
-    folder_key = str(folder).replace(f"{BASEDIR}", "")
-    folder_key = folder_key.replace(os.sep, "")
-    folder_key = folder_key.replace("_", "")
     metadata.close()
     final = open(Path(f"{folder}/{filename}"), "w", encoding="utf-8")
     now = datetime.now().strftime("%d-%m-%Y")
@@ -35,11 +32,6 @@ def frontmatter_check(filename, folder):
         meta["date"] = now
     if not "title" in meta.keys():
         meta["title"] = filename.replace(".md", "")
-    if not "link" in meta.keys():
-        filename = filename.replace(".md", "")
-        filename = filename.replace(" ", "-")
-        clip = f"{web}{folder_key}/{filename}"
-        meta["link"] = clip
     update = frontmatter.dumps(meta)
     final.write(update)
     final.close()

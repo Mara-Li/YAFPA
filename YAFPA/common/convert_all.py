@@ -21,13 +21,12 @@ def diff_file(file, folder, update=0):
         retro_old = checkFile.retro(notes_path)
         meta_old = frontmatter.load(notes_path)
         meta_old = mt.remove_frontmatter(meta_old.metadata)
-
         temp = convert.file_convert(file, folder)
         try:
             front_temp = frontmatter.loads("".join(temp))
         except yaml.parser.ParserError:
             print("ERROR : ", file)
-            pass
+            return False #skip
         meta_new = mt.remove_frontmatter(front_temp.metadata)
         new_version = checkFile.retro(temp, 1)
         if new_version == retro_old and sorted(meta_old.keys()) == sorted(

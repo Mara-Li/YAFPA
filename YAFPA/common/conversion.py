@@ -48,6 +48,7 @@ def clipboard(filepath, folder):
 
 def file_write(file, contents, folder):
     file_name = os.path.basename(file)
+    meta = frontmatter.load(file)
     if contents == "":
         return False
     else:
@@ -60,7 +61,6 @@ def file_write(file, contents, folder):
             mt.frontmatter_check(file_name, folder)
             return True
         else:
-            meta = frontmatter.load(file)
             if not meta["share"] or meta["share"] == False:
                 check.delete_file(file, folder)
             return False
@@ -104,10 +104,8 @@ def file_convert(file, folder, option=0):
     path_folder = path_folder.replace(os.sep, "")
     path_folder = path_folder.replace("_", "")
     if not path_folder in file:
-        data = open(file, "r", encoding="utf-8")
         meta = frontmatter.load(file)
-        lines = data.readlines()
-        data.close()
+        lines = meta.content.splitlines(True)
         if option == 1:
             if "share" not in meta.keys() or meta["share"] is False:
                 meta["share"] = True
@@ -193,6 +191,10 @@ def file_convert(file, folder, option=0):
                 final_text = re.sub("#\^(.*)]]", "]]", final_text)
                 final_text = final_text + "  "
             final.append(final_text)
+        meta_list = [(f"{k}: {v}  \n") for k, v in meta.metadata.items()]
+        meta_list.insert(0, '---  \n')
+        meta_list.insert(len(meta_list) + 1, "---  \n")
+        final = meta_list + final
         return final
 
     else:
