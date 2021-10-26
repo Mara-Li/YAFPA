@@ -16,3 +16,7 @@ dist/*
 venv/*
 YAFPA.egg-info/*
 build/*
+*/__pycache__/*
+
+
+YAFPA/common/__pycache__/
