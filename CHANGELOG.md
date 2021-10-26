@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v1.53.2 (2021-10-26)
+
+
 ## v1.53.1 (2021-10-26)
 ### Fix
 * :ambulance: Repear bug because of filepath ([`03f36a4`](https://github.com/Mara-Li/YAFPA-python/commit/03f36a47ef11914a280d0f1b3feda44ca4927be0))
