@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.52.5 (2021-10-27)
+### Fix
+* :bug: Remove print message ([`4fa4b3f`](https://github.com/Mara-Li/YAFPA-python/commit/4fa4b3ff8fadd5cb12c28f1a65bcb22659343881))
+
 ## v1.52.4 (2021-10-27)
 ### Fix
 * :bug: fix problem with image link on one line ([`ebf1bb3`](https://github.com/Mara-Li/YAFPA-python/commit/ebf1bb383b6967ba1d71e8016c978ffdd63f0398))
