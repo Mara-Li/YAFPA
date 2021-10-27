@@ -20,3 +20,4 @@ build/*
 
 
 YAFPA/common/__pycache__/
+YAFPA/regextext.py
