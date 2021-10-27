@@ -28,7 +28,6 @@ def flags_transform(line, flag):
     else:
         img_flags = ""
     link = re.search("(\[{2}|\().*\.(png|jpg|jpeg|gif)", flag)
-    print(flag)
     final_text = link.group(0)
     final_text = final_text.replace("(", "")
     final_text = final_text.replace("%20", " ")
