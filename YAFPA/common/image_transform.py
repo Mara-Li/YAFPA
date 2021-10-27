@@ -92,7 +92,6 @@ def transform_link(line, link):
 
 
 def convert_to_wikilink(line):
-    # Space in normal link for markdown link are always %20
     final_text = line
     if re.search("\[(.*)]\((.*)\)", final_text):
         links = re.search("\[(.*)]\((.*)\)", final_text).group().split()
@@ -105,9 +104,17 @@ def convert_to_wikilink(line):
             if not re.search("https?:\/\/", links):
                 line = transform_link(line, links)
     elif re.search("https?:\/\/", final_text):
-        link = re.search("https?:\/\/.*", final_text) #solo link fix jekyll liquid
-        link = link.group()
-        line = line.replace(link, f"[{link.strip()}]({link.strip()})")
+        link = re.search("<?(.*)?https?:\/\/.*", final_text).group()
+        spl = re.split(">", link)
+        links = [x for x in spl if re.search("https?:\/\/.*", x)]
+        if len(links) > 1:
+            for f in links:
+                if not "<" in f:
+                    line = final_text.replace(f.strip(), f"[{f.strip()}]({f.strip()})")
+        else:
+            f = links[0]
+            if not "<" in f:
+                line = final_text.replace(f.strip(), f"[{f.strip()}]({f.strip()})")
     return line
 
 
