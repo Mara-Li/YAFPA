@@ -46,13 +46,14 @@ def flags_transform(line, flag):
 
 def move_img(line):
     flags = re.search("(\[{2}|\().*\.(png|jpg|jpeg|gif)(\|[-+].*)?\]{2}", line)
-    flags = flags.group().split("!")
-    if len(flags) > 1:
-        for flag in flags:
-            line = flags_transform(line, flag)
-    else:
-        flags = flags[0]
-        line = flags_transform(line, flags)
+    if flags:
+        flags = flags.group().split("!")
+        if len(flags) > 1:
+            for flag in flags:
+                line = flags_transform(line, flag)
+        else:
+            flags = flags[0]
+            line = flags_transform(line, flags)
     return line
 
 
