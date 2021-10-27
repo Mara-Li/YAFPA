@@ -8,7 +8,12 @@ try:
 except AttributeError:
     pass
 
-from YAFPA.common import file_checking as check, convert_all as all, convert_one as one, setup_config as setup
+from YAFPA.common import (
+    file_checking as check,
+    convert_all as all,
+    convert_one as one,
+    setup_config as setup,
+)
 
 
 def mobile_shortcuts(file="0"):

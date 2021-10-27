@@ -5,7 +5,12 @@ from pathlib import Path
 
 import frontmatter
 
-from YAFPA.common import file_checking as check, image_transform as links, admonition as adm, metadata as mt
+from YAFPA.common import (
+    file_checking as check,
+    image_transform as links,
+    admonition as adm,
+    metadata as mt,
+    )
 from YAFPA.common import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
@@ -192,7 +197,7 @@ def file_convert(file, folder, option=0):
                 final_text = final_text + "  "
             final.append(final_text)
         meta_list = [(f"{k}: {v}  \n") for k, v in meta.metadata.items()]
-        meta_list.insert(0, '---  \n')
+        meta_list.insert(0, "---  \n")
         meta_list.insert(len(meta_list) + 1, "---  \n")
         final = meta_list + final
         return final

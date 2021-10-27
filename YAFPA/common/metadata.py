@@ -63,7 +63,11 @@ def update_frontmatter(file, folder, share=0, link=1):
         meta = frontmatter.loads(update)
         if link != 1:
             meta.metadata.pop("link", None)
-        elif link ==1 and share == 1 and ("share" not in meta.keys() or meta["share"] == "false"):
+        elif (
+            link == 1
+            and share == 1
+            and ("share" not in meta.keys() or meta["share"] == "false")
+        ):
             meta["share"] = "true"
         if tag != "":
             meta["tag"] = tag

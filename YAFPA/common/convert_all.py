@@ -5,7 +5,11 @@ from pathlib import Path
 import frontmatter
 import yaml
 
-from YAFPA.common import file_checking as checkFile, conversion as convert, metadata as mt
+from YAFPA.common import (
+    file_checking as checkFile,
+    conversion as convert,
+    metadata as mt,
+    )
 from YAFPA.common import global_value
 
 BASEDIR = global_value.BASEDIR
@@ -26,7 +30,7 @@ def diff_file(file, folder, update=0):
             front_temp = frontmatter.loads("".join(temp))
         except yaml.parser.ParserError:
             print("ERROR : ", file)
-            return False #skip
+            return False  # skip
         meta_new = mt.remove_frontmatter(front_temp.metadata)
         new_version = checkFile.retro(temp, 1)
         if new_version == retro_old and sorted(meta_old.keys()) == sorted(
@@ -72,12 +76,16 @@ def search_share(option=0, stop_share=1):
                             check = convert.file_write(filepath, contents, folder)
                         destination = checkFile.dest(filepath, folder)
                         if check:
-                            filespush.append(f"Added : {os.path.basename(destination).replace('.md', '')} in {folder}")
+                            filespush.append(
+                                f"Added : {os.path.basename(destination).replace('.md', '')} in {folder}"
+                            )
                     else:
                         if stop_share == 1:
                             if checkFile.delete_file(filepath, folder):
                                 destination = checkFile.dest(filepath, folder)
-                                filespush.append(f"Removed : {os.path.basename(destination).replace('.md', '')} from {folder}")
+                                filespush.append(
+                                    f"Removed : {os.path.basename(destination).replace('.md', '')} from {folder}"
+                                )
 
                 except (
                     yaml.scanner.ScannerError,
@@ -86,7 +94,6 @@ def search_share(option=0, stop_share=1):
                     pass
 
     return filespush, folder
-
 
 
 def convert_all(delopt=False, git=False, force=False, stop_share=0):
@@ -111,13 +118,13 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
         )
         new_files, priv = search_share(1, stop_share)
     if len(new_files) > 0:
-        add=""
+        add = ""
         rm = ""
         for md in new_files:
             if "removed" in md.lower():
-                rm = rm + "\n - " +  md.replace('Removed : ', '')
+                rm = rm + "\n - " + md.replace("Removed : ", "")
             elif "added" in md.lower():
-                add = add + "\n - " + md.replace('Added : ', '')
+                add = add + "\n - " + md.replace("Added : ", "")
         if len(rm) > 0:
             rm = f"🗑️ Removed from blog : {rm}"
         if len(add) > 0:
