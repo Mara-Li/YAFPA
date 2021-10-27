@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.52.4 (2021-10-27)
+### Fix
+* :bug: fix problem with image link on one line ([`ebf1bb3`](https://github.com/Mara-Li/YAFPA-python/commit/ebf1bb383b6967ba1d71e8016c978ffdd63f0398))
+
 ## v1.52.3 (2021-10-27)
 ### Fix
 * Fix flag ([`97f98da`](https://github.com/Mara-Li/YAFPA-python/commit/97f98dac8c931453b8268915072f653e3204407b))
