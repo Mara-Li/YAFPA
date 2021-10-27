@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.52.6 (2021-10-27)
+### Feature
+* :art: Black formating ([`12866cf`](https://github.com/Mara-Li/YAFPA-python/commit/12866cf1a6413d7686d4006c9d2ed840e4389722))
+* :see_no_evil: Update gitignore ([`8fd94eb`](https://github.com/Mara-Li/YAFPA-python/commit/8fd94eb7c1a34d724b166574912298a372659699))
+
+### Fix
+* :bug: Fix convert links for normal links (jekyll liquid) ([`6be2402`](https://github.com/Mara-Li/YAFPA-python/commit/6be240269bb7e6a925f012f94b097ee614827665))
+
 ## v1.52.5 (2021-10-27)
 ### Fix
 * :bug: Remove print message ([`4fa4b3f`](https://github.com/Mara-Li/YAFPA-python/commit/4fa4b3ff8fadd5cb12c28f1a65bcb22659343881))
