@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 import frontmatter
+from unidecode import unidecode
 
 from YAFPA.common import global_value as settings
 from YAFPA.common import metadata as mt
@@ -37,8 +38,8 @@ def retro(filepath, opt=0):
 def delete_file(filepath, folder):
     path = Path(folder)
     for file in os.listdir(path):
-        filename = os.path.basename(filepath)
-        filecheck = os.path.basename(file)
+        filename = unidecode(os.path.basename(filepath))
+        filecheck = unidecode(os.path.basename(file))
         if filecheck == filename:
             os.remove(Path(f"{path}/{file}"))
             mt.update_frontmatter(filepath, folder, 0, 0)
