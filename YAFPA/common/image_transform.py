@@ -1,9 +1,10 @@
 import os
 import re
 import shutil
+
 import unidecode
 
-from . import global_value as settings
+from YAFPA.common import global_value as settings
 
 vault = settings.vault
 img = settings.img

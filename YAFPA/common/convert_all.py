@@ -5,12 +5,12 @@ from pathlib import Path
 import frontmatter
 import yaml
 
-from . import (
+from YAFPA.common import (
     file_checking as checkFile,
     conversion as convert,
     metadata as mt,
     )
-from . import global_value
+from YAFPA.common import global_value
 
 BASEDIR = global_value.BASEDIR
 vault = global_value.vault
@@ -60,7 +60,10 @@ def search_share(option=0, stop_share=1):
                         folder = checkFile.check_folder("_notes")
                     if "share" in yaml_front.keys() and yaml_front["share"] is True:
                         if option == 1:
-                            if "update" in yaml_front.keys() and yaml_front["update"] is False:
+                            if (
+                                "update" in yaml_front.keys()
+                                and yaml_front["update"] is False
+                            ):
                                 update = 1
                             else:
                                 update = 0
@@ -75,16 +78,18 @@ def search_share(option=0, stop_share=1):
                             contents = convert.file_convert(filepath, folder)
                             check = convert.file_write(filepath, contents, folder)
                         destination = checkFile.dest(filepath, folder)
+                        msg_folder = os.path.basename(folder)
                         if check:
                             filespush.append(
-                                f"Added : {os.path.basename(destination).replace('.md', '')} in {folder}"
+                                f"Added : {os.path.basename(destination).replace('.md', '')} in [{msg_folder}]"
                             )
                     else:
                         if stop_share == 1:
                             if checkFile.delete_file(filepath, folder):
+                                msg_folder = os.path.basename(folder)
                                 destination = checkFile.dest(filepath, folder)
                                 filespush.append(
-                                    f"Removed : {os.path.basename(destination).replace('.md', '')} from {folder}"
+                                    f"Removed : {os.path.basename(destination).replace('.md', '')} from [{msg_folder}]"
                                 )
 
                 except (

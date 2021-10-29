@@ -5,13 +5,13 @@ from pathlib import Path
 
 import frontmatter
 
-from . import (
+from YAFPA.common import (
     file_checking as check,
     image_transform as links,
     admonition as adm,
     metadata as mt,
     )
-from . import global_value as settings
+from YAFPA.common import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
 vault = Path(settings.vault)
@@ -21,9 +21,7 @@ def clipboard(filepath, folder):
     filename = os.path.basename(filepath)
     filename = filename.replace(".md", "")
     filename = filename.replace(" ", "-")
-    folder_key = str(folder).replace(f"{settings.BASEDIR}", "")
-    folder_key = folder_key.replace(os.sep, "")
-    folder_key = folder_key.replace("_", "")
+    folder_key = os.path.basename(folder).replace("_", "")
     clip = f"{settings.web}{folder_key}/{filename}"
     if sys.platform == "ios":
         try:
@@ -128,9 +126,7 @@ def file_convert(file, folder, option=0):
         final_text = final_text.replace("\n", "  \n")
         final_text = links.convert_to_wikilink(final_text)
         final_text = links.excalidraw_convert(final_text)
-        if re.search("\^\w+", final_text) and not re.search(
-            "\[\^\w+\]", final_text
-        ):
+        if re.search("\^\w+", final_text) and not re.search("\[\^\w+\]", final_text):
             final_text = re.sub("\^\w+", "", final_text)  # remove block id
         if "embed" in meta.keys() and meta["embed"] == False:
             final_text = links.convert_to_wikilink(final_text)
@@ -180,9 +176,7 @@ def file_convert(file, folder, option=0):
         elif re.search("==(.*)==", final_text):
             final_text = re.sub("==", "[[", final_text, 1)
             final_text = re.sub("( ?)==", "::highlight]] ", final_text, 2)
-        elif re.search(
-            "(\[{2}|\().*\.(png|jpg|jpeg|gif)", final_text
-        ):  # CONVERT IMAGE
+        elif re.search("(\[{2}|\().*\.(png|jpg|jpeg|gif)", final_text):  # CONVERT IMAGE
             final_text = links.move_img(final_text)
         elif re.fullmatch(
             "\\\\", final_text.strip()

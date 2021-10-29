@@ -5,6 +5,7 @@ import YAFPA
 BASEDIR = YAFPA.__path__[0]
 env_path = Path(f"{BASEDIR}/.YAFPA-env")
 
+
 def create_env():
     print(f"Creating environnement in {env_path}")
     env = open(env_path, "w", encoding="utf-8")
