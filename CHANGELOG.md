@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.54.1 (2021-10-30)
+### Fix
+* Added unidecode in file checking for deletion ([`39e5562`](https://github.com/Mara-Li/YAFPA-python/commit/39e556281b55befb4d3148eccb3db858965b0236))
+
 ## v1.54.0 (2021-10-29)
 
 
