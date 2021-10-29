@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.52.7 (2021-10-29)
+### Fix
+* 🔧 Now, config file are in site package. ([`f90689a`](https://github.com/Mara-Li/YAFPA-python/commit/f90689abd851868713f6ac1fb0d8208d5e01cb7b))
+
 ## v1.52.6 (2021-10-27)
 ### Feature
 * :art: Black formating ([`12866cf`](https://github.com/Mara-Li/YAFPA-python/commit/12866cf1a6413d7686d4006c9d2ed840e4389722))
