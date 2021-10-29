@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.53.0 (2021-10-29)
+### Feature
+* :arrow_up: Add unidecode in dependency ([`1c3a569`](https://github.com/Mara-Li/YAFPA-python/commit/1c3a56955294b02ea5263741e20d8674b46ad43f))
+* Remove whitespace ([`6d69c63`](https://github.com/Mara-Li/YAFPA-python/commit/6d69c638c99283cb8b4f716cf60f7fb925fa3c8c))
+* Update requirements ([`a64526d`](https://github.com/Mara-Li/YAFPA-python/commit/a64526dfd70bab76a361db9632383fe322d4e401))
+
+### Fix
+* Repear import ([`e639942`](https://github.com/Mara-Li/YAFPA-python/commit/e63994234cb6cd89847a76e2c5b3baf5bc578cae))
+* Repear bug on mobile ([`e2c0019`](https://github.com/Mara-Li/YAFPA-python/commit/e2c0019de3211180654d435a68e58003e7820fb2))
+
 ## v1.52.7 (2021-10-29)
 ### Fix
 * 🔧 Now, config file are in site package. ([`f90689a`](https://github.com/Mara-Li/YAFPA-python/commit/f90689abd851868713f6ac1fb0d8208d5e01cb7b))
