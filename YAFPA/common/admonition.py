@@ -1,6 +1,4 @@
 import re
-
-
 def admonition_logo(type, line):
     admonition = {
         "note": "🖊️",
