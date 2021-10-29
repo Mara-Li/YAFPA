@@ -4,13 +4,11 @@ from pathlib import Path
 
 from dotenv import dotenv_values
 
+import YAFPA
 from YAFPA.common import setup_config as settup
 
-base = Path.home()
-
-if not os.access(base, os.W_OK):
-    base = os.getcwd()
-env_path = Path(f"{base}/.YAFPA-env")
+BASEDIR = YAFPA.__path__[0]
+env_path = Path(f"{BASEDIR}/.YAFPA-env")
 
 if not os.path.isfile(env_path):
     settup.create_env()

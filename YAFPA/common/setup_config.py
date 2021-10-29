@@ -1,12 +1,9 @@
-import os
 from pathlib import Path
 
-BASEDIR = Path.home()
+import YAFPA
 
-if not os.access(BASEDIR, os.W_OK):
-    BASEDIR = os.getcwd()
+BASEDIR = YAFPA.__path__[0]
 env_path = Path(f"{BASEDIR}/.YAFPA-env")
-
 
 def create_env():
     print(f"Creating environnement in {env_path}")

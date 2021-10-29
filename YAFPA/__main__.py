@@ -63,11 +63,12 @@ def main():
     parser.add_argument(
         "--keep",
         "--k",
+        "--K",
         help="Keep deleted file from vault and removed shared file",
         action="store_true",
     )
     parser.add_argument(
-        "--config", "--c", help="Edit the config file", action="store_true"
+        "--config", "--c", "--C", help="Edit the config file", action="store_true"
     )
     args = parser.parse_args()
     ori = args.filepath
