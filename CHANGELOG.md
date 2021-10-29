@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v1.54.0 (2021-10-29)
+
+
 ## v1.53.0 (2021-10-29)
 ### Feature
 * :arrow_up: Add unidecode in dependency ([`1c3a569`](https://github.com/Mara-Li/YAFPA-python/commit/1c3a56955294b02ea5263741e20d8674b46ad43f))
