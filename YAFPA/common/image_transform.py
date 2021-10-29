@@ -1,8 +1,9 @@
 import os
 import re
 import shutil
+import unidecode
 
-from YAFPA.common import global_value as settings
+from . import global_value as settings
 
 vault = settings.vault
 img = settings.img
@@ -13,7 +14,7 @@ def get_image(image):
     for sub, dirs, files in os.walk(vault):
         for file in files:
             filepath = sub + os.sep + file
-            if image in file:
+            if unidecode.unidecode(image) in unidecode.unidecode(file):
                 return filepath
 
 

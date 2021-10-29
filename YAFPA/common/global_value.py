@@ -5,7 +5,7 @@ from pathlib import Path
 from dotenv import dotenv_values
 
 import YAFPA
-from YAFPA.common import setup_config as settup
+from . import setup_config as settup
 
 BASEDIR = YAFPA.__path__[0]
 env_path = Path(f"{BASEDIR}/.YAFPA-env")

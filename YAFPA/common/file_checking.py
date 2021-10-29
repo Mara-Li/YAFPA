@@ -4,8 +4,8 @@ from pathlib import Path
 
 import frontmatter
 
-from YAFPA.common import global_value as settings
-from YAFPA.common import metadata as mt
+from . import global_value as settings
+from . import metadata as mt
 
 BASEDIR = settings.BASEDIR
 post = settings.post
@@ -47,18 +47,18 @@ def delete_file(filepath, folder):
 
 
 def delete_not_exist():
-    # for file in poste : if file not in vault : delete file
     vault_file = []
+    blog_file=[]
     important_folder = ["_includes", "_layout", "_site", "assets", "script"]
-    for filename in glob.iglob(f"{vault}**/**", recursive=True):
-        vault_file.append(os.path.basename(filename))
+    for i,j,k in os.walk(vault) :
+        for ki in k:
+            vault_file.append(os.path.basename(ki))
     for file in glob.iglob(f"{BASEDIR}/_*/**"):
-        if (
-            not any(folder in file for folder in important_folder)
-            and os.path.basename(file) not in vault_file
-        ):
-            os.remove(Path(file))
+        if not (any(i in file for i in important_folder)) :
+            if os.path.basename(file) not in vault_file:
+                os.remove(file)
 
+    
 
 def check_file(filepath, folder):
     post_file = []

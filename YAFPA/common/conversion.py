@@ -5,13 +5,13 @@ from pathlib import Path
 
 import frontmatter
 
-from YAFPA.common import (
+from . import (
     file_checking as check,
     image_transform as links,
     admonition as adm,
     metadata as mt,
     )
-from YAFPA.common import global_value as settings
+from . import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
 vault = Path(settings.vault)
@@ -108,99 +108,95 @@ def file_convert(file, folder, option=0):
     path_folder = str(folder).replace(f"{BASEDIR}", "")
     path_folder = path_folder.replace(os.sep, "")
     path_folder = path_folder.replace("_", "")
-    if not path_folder in file:
-        meta = frontmatter.load(file)
-        lines = meta.content.splitlines(True)
-        if option == 1:
-            if "share" not in meta.keys() or meta["share"] is False:
-                meta["share"] = True
-                update = frontmatter.dumps(meta)
-                meta = frontmatter.loads(update)
-                mt.update_frontmatter(file, folder, 1)
-            else:
-                mt.update_frontmatter(file, folder, 0)
+    meta = frontmatter.load(file)
+    lines = meta.content.splitlines(True)
+    if option == 1:
+        if "share" not in meta.keys() or meta["share"] is False:
+            meta["share"] = True
+            update = frontmatter.dumps(meta)
+            meta = frontmatter.loads(update)
+            mt.update_frontmatter(file, folder, 1)
         else:
             mt.update_frontmatter(file, folder, 0)
-            if "share" not in meta.keys() or meta["share"] is False:
-                return final
-        lines = adm.admonition_trad(lines)
-        for ln in lines:
-            final_text = ln.replace("  \n", "\n")
-            final_text = final_text.replace("\n", "  \n")
-            final_text = links.convert_to_wikilink(final_text)
-            final_text = links.excalidraw_convert(final_text)
-            if re.search("\^\w+", final_text) and not re.search(
-                "\[\^\w+\]", final_text
-            ):
-                final_text = re.sub("\^\w+", "", final_text)  # remove block id
-            if "embed" in meta.keys() and meta["embed"] == False:
-                final_text = links.convert_to_wikilink(final_text)
-                final_text = links.convert_no_embed(final_text)
-            else:
-                final_text = links.transluction_note(final_text)
-            final_text = re.sub("\%{2}(.*)\%{2}", "", final_text)
-            final_text = re.sub("^\%{2}(.*)", "", final_text)
-            final_text = re.sub("(.*)\%{2}$", "", final_text)
-            if re.search(r"\\U\w+", final_text) and not "Users" in final_text:
-                emojiz = re.search(r"\\U\w+", final_text)
-                emojiz = emojiz.group().strip().replace('"', "")
-                convert_emojiz = (
-                    emojiz.encode("ascii")
-                    .decode("unicode-escape")
-                    .encode("utf-16", "surrogatepass")
-                    .decode("utf-16")
-                )
-                final_text = re.sub(r"\\U\w+", convert_emojiz, final_text)
-            if final_text.strip().endswith("%%") or final_text.strip().startswith("%%"):
-                final_text = ""
-            elif re.search("[!?]{3}ad-\w+", final_text):
-                final_text = final_text.replace("  \n", "\n")
-            if re.search("#\w+", final_text) and not re.search("`#\w+`", final_text):
-                final_text = convert_hashtags(final_text)
-            elif re.search("\{\: (id=|class=|\.).*\}", final_text):
-                IAL = re.search("\{\: (id=|class=|\.).*\}", final_text)
-                contentIAL = re.search("(.*)\{", final_text)
-                if contentIAL:
-                    contentIAL = contentIAL.group().replace("{", "")
-                    IAL = IAL.group()
-                    IAL = IAL.replace("id=", "#")
-                    IAL = IAL.replace("class=", ".")
-                    if re.search("[\*\_]", contentIAL):  # markdown found
-                        syntax = re.search("(\*\*|\*|_)", contentIAL)
-                        new = re.sub("(\*\*|\*|_)", "", contentIAL)  # clear md syntax
-                        new = syntax.group() + new + syntax.group() + IAL
-                    else:
-                        new = "**" + contentIAL.rstrip() + "**" + IAL
-                    final_text = re.sub(
-                        "(.*)\{\: (id=|class=|\.).*\}(\*\*|\*|_)( ?)", new, final_text
-                    )
-                if re.search("==(.*)==", final_text):
-                    final_text = re.sub("==", "[[", final_text, 1)
-                    final_text = re.sub("( ?)==", "::highlight]]", final_text, 2)
-                    final_text = re.sub("\{\: (id=|class=|\.).*\}", "", final_text)
-            elif re.search("==(.*)==", final_text):
-                final_text = re.sub("==", "[[", final_text, 1)
-                final_text = re.sub("( ?)==", "::highlight]] ", final_text, 2)
-            elif re.search(
-                "(\[{2}|\().*\.(png|jpg|jpeg|gif)", final_text
-            ):  # CONVERT IMAGE
-                final_text = links.move_img(final_text)
-            elif re.fullmatch(
-                "\\\\", final_text.strip()
-            ):  # New line when using "\" in obsidian file
-                final_text = "  \n"
-            elif re.search("(\[{2}|\[).*", final_text):
-                # Escape pipe for link name
-                final_text = final_text.replace("|", "\|")
-                # Remove block ID (because it doesn't work)
-                final_text = re.sub("#\^(.*)]]", "]]", final_text)
-                final_text = final_text + "  "
-            final.append(final_text)
-        meta_list = [(f"{k}: {v}  \n") for k, v in meta.metadata.items()]
-        meta_list.insert(0, "---  \n")
-        meta_list.insert(len(meta_list) + 1, "---  \n")
-        final = meta_list + final
-        return final
-
     else:
-        return final
+        mt.update_frontmatter(file, folder, 0)
+        if "share" not in meta.keys() or meta["share"] is False:
+            return final
+    lines = adm.admonition_trad(lines)
+    for ln in lines:
+        final_text = ln.replace("  \n", "\n")
+        final_text = final_text.replace("\n", "  \n")
+        final_text = links.convert_to_wikilink(final_text)
+        final_text = links.excalidraw_convert(final_text)
+        if re.search("\^\w+", final_text) and not re.search(
+            "\[\^\w+\]", final_text
+        ):
+            final_text = re.sub("\^\w+", "", final_text)  # remove block id
+        if "embed" in meta.keys() and meta["embed"] == False:
+            final_text = links.convert_to_wikilink(final_text)
+            final_text = links.convert_no_embed(final_text)
+        else:
+            final_text = links.transluction_note(final_text)
+        final_text = re.sub("\%{2}(.*)\%{2}", "", final_text)
+        final_text = re.sub("^\%{2}(.*)", "", final_text)
+        final_text = re.sub("(.*)\%{2}$", "", final_text)
+        if re.search(r"\\U\w+", final_text) and not "Users" in final_text:
+            emojiz = re.search(r"\\U\w+", final_text)
+            emojiz = emojiz.group().strip().replace('"', "")
+            convert_emojiz = (
+                emojiz.encode("ascii")
+                .decode("unicode-escape")
+                .encode("utf-16", "surrogatepass")
+                .decode("utf-16")
+            )
+            final_text = re.sub(r"\\U\w+", convert_emojiz, final_text)
+        if final_text.strip().endswith("%%") or final_text.strip().startswith("%%"):
+            final_text = ""
+        elif re.search("[!?]{3}ad-\w+", final_text):
+            final_text = final_text.replace("  \n", "\n")
+        if re.search("#\w+", final_text) and not re.search("`#\w+`", final_text):
+            final_text = convert_hashtags(final_text)
+        elif re.search("\{\: (id=|class=|\.).*\}", final_text):
+            IAL = re.search("\{\: (id=|class=|\.).*\}", final_text)
+            contentIAL = re.search("(.*)\{", final_text)
+            if contentIAL:
+                contentIAL = contentIAL.group().replace("{", "")
+                IAL = IAL.group()
+                IAL = IAL.replace("id=", "#")
+                IAL = IAL.replace("class=", ".")
+                if re.search("[\*\_]", contentIAL):  # markdown found
+                    syntax = re.search("(\*\*|\*|_)", contentIAL)
+                    new = re.sub("(\*\*|\*|_)", "", contentIAL)  # clear md syntax
+                    new = syntax.group() + new + syntax.group() + IAL
+                else:
+                    new = "**" + contentIAL.rstrip() + "**" + IAL
+                final_text = re.sub(
+                    "(.*)\{\: (id=|class=|\.).*\}(\*\*|\*|_)( ?)", new, final_text
+                )
+            if re.search("==(.*)==", final_text):
+                final_text = re.sub("==", "[[", final_text, 1)
+                final_text = re.sub("( ?)==", "::highlight]]", final_text, 2)
+                final_text = re.sub("\{\: (id=|class=|\.).*\}", "", final_text)
+        elif re.search("==(.*)==", final_text):
+            final_text = re.sub("==", "[[", final_text, 1)
+            final_text = re.sub("( ?)==", "::highlight]] ", final_text, 2)
+        elif re.search(
+            "(\[{2}|\().*\.(png|jpg|jpeg|gif)", final_text
+        ):  # CONVERT IMAGE
+            final_text = links.move_img(final_text)
+        elif re.fullmatch(
+            "\\\\", final_text.strip()
+        ):  # New line when using "\" in obsidian file
+            final_text = "  \n"
+        elif re.search("(\[{2}|\[).*", final_text):
+            # Escape pipe for link name
+            final_text = final_text.replace("|", "\|")
+            # Remove block ID (because it doesn't work)
+            final_text = re.sub("#\^(.*)]]", "]]", final_text)
+            final_text = final_text + "  "
+        final.append(final_text)
+    meta_list = [(f"{k}: {v}  \n") for k, v in meta.metadata.items()]
+    meta_list.insert(0, "---  \n")
+    meta_list.insert(len(meta_list) + 1, "---  \n")
+    final = meta_list + final
+    return final

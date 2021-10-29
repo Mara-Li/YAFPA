@@ -8,13 +8,12 @@ try:
 except AttributeError:
     pass
 
-from YAFPA.common import (
+from common import (
     file_checking as check,
     convert_all as all,
     convert_one as one,
     setup_config as setup,
 )
-
 
 def mobile_shortcuts(file="0"):
     delopt = False
@@ -81,6 +80,7 @@ def main():
         setup.create_env()
         return
     if not args.keep:
+        
         check.delete_not_exist()
         stop_share = 1
     else:
@@ -92,6 +92,7 @@ def main():
             print(f"Error : {ori} doesn't exist.")
             return
     else:
+        pass
         all.convert_all(delopt, ng, force, stop_share)
 
 
