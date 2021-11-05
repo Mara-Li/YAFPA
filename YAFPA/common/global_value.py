@@ -28,21 +28,28 @@ env = dotenv_values(env_path)
 
 # Seems to have problem with dotenv with pyto on IOS 15
 try:
-    BASEDIR = Path(env["blog_path"])
-    vault = Path(env["vault"])
+    BASEDIR = Path(env["blog_path"]).expanduser()
+    vault = Path(env["vault"]).expanduser()
     web = env["blog"]
 except KeyError:
     with open(env_path) as f:
-        vault = "".join(f.readlines(1)).replace("vault=", "")
-        BASEDIR = "".join(f.readlines(2)).replace("blog_path=", "")
+        vault_str = "".join(f.readlines(1)).replace("vault=", "")
+        basedir_str = "".join(f.readlines(2)).replace("blog_path=", "")
+
+        vault = Path(vault_str)
+        BASEDIR = Path(basedir_str)
         web = "".join(f.readlines(3)).replace("blog=", "")
-    if len(vault) == 0 or len(web) == 0 or len(web) == 0:
-        print("Please provide the good path for all folder")
+    if len(vault_str) == 0 or len(basedir_str) == 0 or len(web) == 0:
+        print("Please provide a valid path for all config items")
         exit(1)
+
+# Expand ~ to actual home dir
+vault = vault.expanduser()
+BASEDIR = BASEDIR.expanduser()
+
 path = Path(f"{BASEDIR}/.git")  # GIT SHARED
 post = Path(f"{BASEDIR}/_notes")
 img = Path(f"{BASEDIR}/assets/img/")
-
 
 def git_push(COMMIT):
     try:
