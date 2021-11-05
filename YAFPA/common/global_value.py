@@ -40,7 +40,7 @@ except KeyError:
         BASEDIR = Path(basedir_str)
         web = "".join(f.readlines(3)).replace("blog=", "")
     if len(vault_str) == 0 or len(basedir_str) == 0 or len(web) == 0:
-        print("Please provide a valid path for all config items")
+        print("Please provide a non-empty path for all config items")
         exit(1)
 
 # Expand ~ to actual home dir
