@@ -47,15 +47,22 @@ def flags_transform(line, flag):
 
 
 def move_img(line):
-    flags = re.search("(\[{2}|\().*\.(png|jpg|jpeg|gif)(\|)?(.*)?[-+]?(.*)?\]{2}", line)
-    if flags:
-        flags = flags.group().split("!")
-        if len(flags) > 1:
-            for flag in flags:
-                line = flags_transform(line, flag)
-        else:
-            flags = flags[0]
-            line = flags_transform(line, flags)
+    if "[[" in line:
+        # ![[image path]] - Stored in Vault
+        pattern = "(\[{2}|\().*\.(png|jpg|jpeg|gif)(\|[-+].*)?\]{2}"
+    else:
+        # ![alt_text](image link)
+        pattern = "\[.*]\((.*\.(png|jpg|jpeg|gif))(\?q=.*)*\)"
+
+    flags = re.search(pattern, line)
+    flags = flags.group().split("!")
+    if len(flags) > 1:
+        for flag in flags:
+            line = flags_transform(line, flag)
+    else:
+        flags = flags[0]
+        line = flags_transform(line, flags)
+
     return line
 
 
