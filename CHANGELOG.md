@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.54.3 (2021-11-06)
+### Fix
+* :bug: Emergency fix for image transform ([`9e39417`](https://github.com/Mara-Li/YAFPA-python/commit/9e39417ac4874a2db78138aa7494ec24f570b0ef))
+
 ## v1.54.2 (2021-11-06)
 
 
