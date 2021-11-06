@@ -42,9 +42,18 @@ except KeyError:
     if len(vault_str) == 0 or len(basedir_str) == 0 or len(web) == 0:
         print("Please provide a valid path for all config items")
         exit(1)
+except RuntimeError:
+    BASEDIR = Path(env["blog_path"])
+    vault = Path(env["vault"])
+    web = env["blog"]
 
-vault = vault.expanduser()
-BASEDIR = BASEDIR.expanduser()
+try:
+    vault = vault.expanduser()
+    BASEDIR = BASEDIR.expanduser()
+except RuntimeError:
+    print("Please, provid a valid path for all config item.")
+    exit(1)
+
 path = Path(f"{BASEDIR}/.git")  # GIT SHARED
 post = Path(f"{BASEDIR}/_notes")
 img = Path(f"{BASEDIR}/assets/img/")
