@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.54.4 (2021-11-06)
+### Fix
+* :bug: Add a patch for expanduser and runtimeError ([`950086b`](https://github.com/Mara-Li/YAFPA-python/commit/950086b9cbff62562da73d3f6edc426801d11ae2))
+
 ## v1.54.3 (2021-11-06)
 ### Fix
 * :bug: Emergency fix for image transform ([`9e39417`](https://github.com/Mara-Li/YAFPA-python/commit/9e39417ac4874a2db78138aa7494ec24f570b0ef))
