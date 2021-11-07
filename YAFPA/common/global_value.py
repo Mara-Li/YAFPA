@@ -58,6 +58,9 @@ path = Path(f"{BASEDIR}/.git")  # GIT SHARED
 post = Path(f"{BASEDIR}/_notes")
 img = Path(f"{BASEDIR}/assets/img/")
 
+# The img/ directory may not exist yet if starting from scratch or from one that has not had images yet
+img.mkdir(exist_ok=True)
+
 
 def git_push(COMMIT):
     try:
