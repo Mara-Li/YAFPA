@@ -106,21 +106,24 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
     else:
         git_info = "PUSH"
 
+    time_now = datetime.now().strftime('%H:%M:%S')
+
     if delopt:  # preserve
         print(
-            f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- PRESERVE FILES"
+            f"[{time_now}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- PRESERVE FILES"
         )
         new_files, priv = search_share(0, stop_share)
     elif force:
         print(
-            f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- FORCE UPDATE"
+            f"[{time_now}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- FORCE UPDATE"
         )
         new_files, priv = search_share(2, stop_share)
     else:
         print(
-            f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- UPDATE MODIFIED FILES"
+            f"[{time_now}] STARTING CONVERT [ALL] OPTIONS :\n- {git_info}\n- UPDATE MODIFIED FILES"
         )
         new_files, priv = search_share(1, stop_share)
+
     if len(new_files) > 0:
         add = ""
         rm = ""
@@ -129,6 +132,7 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
                 rm = rm + "\n - " + md.replace("Removed : ", "")
             elif "added" in md.lower():
                 add = add + "\n - " + md.replace("Added : ", "")
+
         if len(rm) > 0:
             rm = f"🗑️ Removed from blog : {rm}"
         if len(add) > 0:

@@ -21,11 +21,8 @@ def mobile_shortcuts(file="0"):
     git = True
     if file == "--c":
         setup.create_env()
-    elif file != "0":
-        if os.path.exists(file):
-            one.convert_one(file, delopt, git)
-        else:
-            all.convert_all(git=False)
+    elif file != "0" and os.path.exists(file):
+        one.convert_one(file, delopt, git)
     else:
         all.convert_all(git=False)
 
@@ -80,8 +77,8 @@ def main():
     if args.config:
         setup.create_env()
         return
-    if not args.keep:
 
+    if not args.keep:
         check.delete_not_exist()
         stop_share = 1
     else:
@@ -93,7 +90,6 @@ def main():
             print(f"Error : {ori} doesn't exist.")
             return
     else:
-        pass
         all.convert_all(delopt, ng, force, stop_share)
 
 
