@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v1.55.0 (2021-11-08)
+
+
 ## v1.54.6 (2021-11-08)
 ### Fix
 * **admonition:** Fix admonition and adjust list style. ([`ae83a60`](https://github.com/Mara-Li/YAFPA-python/commit/ae83a600a5bbf7c49d4982462e578e34ebffc4bf))
