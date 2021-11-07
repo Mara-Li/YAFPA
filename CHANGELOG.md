@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v1.54.5 (2021-11-07)
+
+
 ## v1.54.4 (2021-11-06)
 ### Fix
 * :bug: Add a patch for expanduser and runtimeError ([`950086b`](https://github.com/Mara-Li/YAFPA-python/commit/950086b9cbff62562da73d3f6edc426801d11ae2))
