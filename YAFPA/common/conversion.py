@@ -120,6 +120,7 @@ def file_convert(file, folder, option=0):
         mt.update_frontmatter(file, folder, 0)
         if "share" not in meta.keys() or meta["share"] is False:
             return final
+
     lines = adm.admonition_trad(lines)
     for ln in lines:
         final_text = ln.replace("  \n", "\n")

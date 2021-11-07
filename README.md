@@ -19,7 +19,7 @@ The first time you use the script, it will ask you three things :
 - The path of the blog (absolute too !)
 - The link of your blog, as `https://my-awesome-blog.netlify.app/`
 
-You can reconfig the path with `yafpa --config`
+You can reconfigure the path with `yafpa --config`
 
 The file will be created in `$HOME/.YAFPA-env` (`~/.YAFPA-env`)  so you can edit it directly. 
 
@@ -40,7 +40,7 @@ optional arguments:
 
 ## Checking differences
 The script will convert all file with `share:true` and check if the contents 
-are differents with the version in `_notes`. The only things that are 
+are different to the versions in `_notes`. The only things that are 
 ignored is the contents of the metadata. If you want absolutely change the 
 metadata you can:
 - Use `yafpa --file <filepath>` directly
@@ -56,8 +56,8 @@ metadata you can:
 
 ⚠️ In case you have two files with the same name but :
 - In different folder
-- With different sharing statut or folder
-The script will bug because **I don't check folder** (It's volontary). In this unique case, you need to rename one of the files. 
+- With different sharing status or folder
+The script will bug because **The folder is not checked** (It's not required). In this unique case, you need to rename one of the files. 
 
 - In the same way, in case you change the folder key in the metadata, you will have two identic file in different folder. 
 
@@ -79,7 +79,7 @@ The script :
 - Moves image in `assets/img` and convert (with alt support)
 - Converts highlight (`==mark==` to `[[mark::highlight]]`)
 - Converts "normal" writing to GFM markdown (adding `  \n` each `\n`)
-- Supports non existant file (adding a css for that 😉)
+- Supports non existent file (adding a css for that 😉)
 - Supports image flags css (Lithou snippet 🙏)
 - Support normal and external files (convert "normal markdown link" to 
   "wikilinks")
@@ -89,13 +89,13 @@ The script :
 - Frontmatter :  Update the date. If there is already a `date` key, save it to `created` and update `date`.
 - Frontmatter : In absence of title, add the file's title.
 - Copy the link to your clipboard if one file is edited.
-- ⭐ Admonition convertion to "callout inspired notion"
+- ⭐ Admonition conversion to "callout inspired notion"
 - Update the frontmatter in the original file, adding the link and change `share` to true if one file is shared.
 
 Finally, the plugin will add, commit and push if supported.
 
 Note : The clipboard may not work in your configuration. I have (and can) only test the script on IOS and Windows, so I use `pyperclip` and `pasteboard` to do that. If you are on MacOS, Linux, Android, please, check your configuration on your python and open an issue if it doesn't work. 
-Note : I **can't** testing on these 3 OS, so I can't create a clipboard option on my own. 
+Note : I **can't** test on these 3 OSes, so I can't create a clipboard option on my own. 
 
 ### Custom CSS 
 You can add CSS using the file (custom.css)[https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/assets/css/custom.css]. The plugin [Markdown Attribute](https://github.com/valentine195/obsidian-markdown-attributes) allow to use the creation of inline css. 
@@ -120,7 +120,7 @@ The script will :
 - Convert ` ```ad-``` ` to ```!!!ad-```
 - Bold title and add a IAL `{: .title}`
 
-JavaScript will niced all things.
+JavaScript will make all things nice.
 
 ⚠️ As always with markdown, you will see some problem with new paragraph inside admonition. You can use `$~$` to fake line. The script will automatically add this.
 Also, you can add emoji on title to add some nice formatting.
