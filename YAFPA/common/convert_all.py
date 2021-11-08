@@ -106,7 +106,7 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
     else:
         git_info = "PUSH"
 
-    time_now = datetime.now().strftime('%H:%M:%S')
+    time_now = datetime.now().strftime("%H:%M:%S")
 
     if delopt:  # preserve
         print(

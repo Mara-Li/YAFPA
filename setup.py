@@ -18,7 +18,7 @@ setup(
         "python-frontmatter",
         "pyYAML",
         "pyperclip",
-        "unidecode"
+        "unidecode",
     ],
     license="AGPL",
     keywords="obsidian, obsidian.md, free publish, publish, jekyll, blog",

@@ -32,7 +32,7 @@ def admonition_logo(type, line):
         "exemple": "📌",
         "quote": "📋",
         "cite": "📋",
-        }
+    }
     if type in admonition.keys():
         logo = admonition[type]
     else:
@@ -46,8 +46,8 @@ def admonition_logo(type, line):
 
 def admonition_trad_content(line, type):
     title = line
-    if re.search('[*\-\+] ', line):
-        title = re.sub('[*\-\+] ', '**•**{: .bullet} ', line)
+    if re.search("[*\-\+] ", line):
+        title = re.sub("[*\-\+] ", "**•**{: .bullet} ", line)
     if "collapse:" in line:
         title = ""
     elif "icon:" in line:
@@ -66,14 +66,38 @@ def admonition_trad(file_data):
     code_dict = {}
     start_list = []
     end_list = []
-    adm_list = ['note', 'seealso', 'abstract', 'summary', 'tldr', 'info',
-           'todo', 'tip',
-           'hint', 'important', 'success', 'check', 'done', 'question',
-           'help', 'faq', 'warning',
-           'caution', 'attention', 'failure', 'fail', 'missing', 'danger',
-           'error', 'bug', 'example', 'exemple', "abstract",
-           'quote', 'cite'
-           ]
+    adm_list = [
+        "note",
+        "seealso",
+        "abstract",
+        "summary",
+        "tldr",
+        "info",
+        "todo",
+        "tip",
+        "hint",
+        "important",
+        "success",
+        "check",
+        "done",
+        "question",
+        "help",
+        "faq",
+        "warning",
+        "caution",
+        "attention",
+        "failure",
+        "fail",
+        "missing",
+        "danger",
+        "error",
+        "bug",
+        "example",
+        "exemple",
+        "abstract",
+        "quote",
+        "cite",
+    ]
     for i in range(0, len(file_data)):
         if re.search("[`?!]{3}( ?)ad-(.*)", file_data[i]):
             start = i
@@ -82,8 +106,7 @@ def admonition_trad(file_data):
             end = i
             end_list.append(end)
     for i, j in zip(start_list, end_list):
-        code = {
-            code_index: (i, j)}
+        code = {code_index: (i, j)}
         code_index = code_index + 1
         code_dict.update(code)
 
@@ -100,18 +123,18 @@ def admonition_trad(file_data):
             adm = "MT"
             title = title.group(2)
         first_block = re.search("ad-(\w+)", file_data[ad_start])
-        adm_type_code = first_block.group().replace('ad-', '')
+        adm_type_code = first_block.group().replace("ad-", "")
         if adm_type_code not in adm_list:
             first_block = "ad-note"
         else:
             first_block = first_block.group()
         first_block = "  \n!!!" + first_block + "  "
 
-        num_lines = lambda x: x.count('\n')
+        num_lines = lambda x: x.count("\n")
 
         file_data[ad_start] = re.sub(
             "[`!?]{3}( ?)ad-(.*)", first_block, file_data[ad_start]
-            )
+        )
 
         file_data[ad_end] = "  \n"
         for i in range(ad_start, ad_end):
