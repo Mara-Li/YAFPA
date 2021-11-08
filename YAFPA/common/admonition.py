@@ -1,5 +1,12 @@
+import os
 import re
+from pathlib import Path
 
+import yaml
+
+from YAFPA.common import global_value as settings
+
+BASEDIR = Path(settings.BASEDIR)
 
 def admonition_logo(type, line):
     admonition = {
@@ -33,10 +40,25 @@ def admonition_logo(type, line):
         "quote": "📋",
         "cite": "📋",
     }
+    admonition_custom = Path(f"{BASEDIR}/custom_admonition.yml")
+    custom={}
+
+    if os.path.exists(admonition_custom):
+        with open(admonition_custom, "r", encoding="utf-8") as stream:
+            try:
+                custom = yaml.safe_load(stream)
+            except yaml.YAMLError as exc:
+                print(exc)
+                exit(1)
+
     if type in admonition.keys():
         logo = admonition[type]
+    elif len(custom) > 0:
+        if type in custom.keys():
+            logo = custom[type][0]
     else:
-        logo = "🖊️ [" + type.title() + "]"
+        logo = "🖊️ <u>" + type.title() + "</u>"
+
     if line == "":
         title = "**" + logo + "**{: .title}  \n"
     else:
