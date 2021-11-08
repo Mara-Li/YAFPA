@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.55.1 (2021-11-08)
+### Feature
+* Added a way to have custom admonition ! ([`1c71bcd`](https://github.com/Mara-Li/YAFPA-python/commit/1c71bcdd2933c2c7fcf5c9ad088011068be4db44))
+* **admonition:** Added a way to have custom admonition ! ([`b9884fd`](https://github.com/Mara-Li/YAFPA-python/commit/b9884fd5ca6209b2bd9819d6e71dabc692491b56))
+
 ## v1.55.0 (2021-11-08)
 
 
