@@ -53,14 +53,17 @@ def admonition_logo(type, line):
 
     if type in admonition.keys():
         logo = admonition[type]
+        admo_type = type.title()
     elif len(custom) > 0:
         if type in custom.keys():
             logo = custom[type][0]
+            admo_type = custom[type][1].title()
     else:
-        logo = "🖊️ <u>" + type.title() + "</u>"
+        logo = "🖊️"
+        admo_type = type.title()
 
     if line == "":
-        title = "**" + logo + "**{: .title}  \n"
+        title = "**" + logo + ' <u>' + admo_type + '</u>' + "**{: .title}  \n"
     else:
         title = "**" + logo + " " + line + "**{: .title}  \n"
     return title

@@ -98,13 +98,25 @@ Note : The clipboard may not work in your configuration. I have (and can) only t
 Note : I **can't** test on these 3 OSes, so I can't create a clipboard option on my own. 
 
 ### Custom CSS 
-You can add CSS using the file (custom.css)[https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/assets/css/custom.css]. The plugin [Markdown Attribute](https://github.com/valentine195/obsidian-markdown-attributes) allow to use the creation of inline css. 
+You can add CSS using the file [custom.css](https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/assets/css/custom.css). The plugin [Markdown Attribute](https://github.com/valentine195/obsidian-markdown-attributes) allow to use the creation of inline css. 
 Some information about this :
 - You need to add `:` after the first `{`
 - The inline IAL work only if there is stylized markdown. In absence, the text will be bolded. 
 - It won't work with highlight (removed automatically by the script)
  
 ⚠️ As I use CodeMirror Options and Contextual Typography, I warn you : the use of `#tags` to stylize the text before it doesn't work with my build. So, as an option to don't have a random tag in a text, you can use `custom.css` to remove it with `display: none` (you can have an example with `#left`). 
+
+### Custom Admonition
+You can now use custom admonition using the file [custom_admonition.yml](https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/custom_admonition.yml). The file is formated as a YAML :
+```yml
+admonition_type: #In obsidian
+  - logo #emoji
+  - admonition title: #the name you want in the website 
+```
+- Admonition name correspond to `admonition type` in the admonition plugin.
+- Admonition title correspond to `admonition title` you use in the admonition plugin.
+
+You need to create multiple key and value for each different synonyme you use (as in admonition...)
 
 ### Frontmatter settings
 - `share: true` : Share the file
