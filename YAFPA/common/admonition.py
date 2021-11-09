@@ -37,8 +37,8 @@ def admonition_logo(type, line):
         "bug": "🐛",
         "example": "📌",
         "exemple": "📌",
-        "quote": "📋",
-        "cite": "📋",
+        "quote": "🗨️",
+        "cite": "🗨️",
     }
     admonition_custom = Path(f"{BASEDIR}/custom_admonition.yml")
     custom={}
