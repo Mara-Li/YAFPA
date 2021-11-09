@@ -21,7 +21,7 @@ The first time you use the script, it will ask you three things :
 
 You can reconfigure the path with `yafpa --config`
 
-The file will be created in `$HOME/.YAFPA-env` (`~/.YAFPA-env`)  so you can edit it directly. 
+The file will be created in your site_package folder. 
 
 # Script
 usage: yafpa [-h] [--preserve | --update] [--filepath FILEPATH] [--git] [--keep] [--config]
@@ -106,17 +106,6 @@ Some information about this :
  
 ⚠️ As I use CodeMirror Options and Contextual Typography, I warn you : the use of `#tags` to stylize the text before it doesn't work with my build. So, as an option to don't have a random tag in a text, you can use `custom.css` to remove it with `display: none` (you can have an example with `#left`). 
 
-### Custom Admonition
-You can now use custom admonition using the file [custom_admonition.yml](https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/custom_admonition.yml). The file is formated as a YAML :
-```yml
-admonition_type: #In obsidian
-  - logo #emoji
-  - admonition title: #the name you want in the website 
-```
-- Admonition name correspond to `admonition type` in the admonition plugin.
-- Admonition title correspond to `admonition title` you use in the admonition plugin.
-
-You need to create multiple key and value for each different synonyme you use (as in admonition...)
 
 ### Frontmatter settings
 - `share: true` : Share the file
@@ -137,12 +126,30 @@ JavaScript will make all things nice.
 ⚠️ As always with markdown, you will see some problem with new paragraph inside admonition. You can use `$~$` to fake line. The script will automatically add this.
 Also, you can add emoji on title to add some nice formatting.
 
+#### Custom Admonition
+You can now use custom admonition using the file [custom_admonition.yml](https://github.com/Mara-Li/yet-another-free-publish-alternative/blob/master/custom_admonition.yml). The file is formated as a YAML :
+```yml
+admonition_type: #In obsidian
+  - logo #emoji
+  - admonition title: #the name you want in the website 
+```
+- Admonition name correspond to `admonition type` in the admonition plugin.
+- Admonition title correspond to `admonition title` you use in the admonition plugin.
+
+You need to create multiple key and value for each different synonyme you use (as in admonition...)
+
 ### IOS Shortcuts
 
 You need to found the path of your vault and the blog in your phone. To achieve that, I use [a-shell](https://holzschu.github.io/a-Shell_iOS/). 
 
 First, in a-shell, run `pickFolder` and choose the folder of your vault, and rerun `pickFolder` to choose the folder where are the blog data (you need to clone with [Working Copy](https://workingcopyapp.com/))
 After, do `showmarks` and copy the two path in any note app. Check if the path is not broken because of the paste!
+You can also do :
+```bash
+cd 
+showmarks > bookmark
+vim bookmark
+```
 
 Here is a blank sheet to help you if you want to manually write / edit it :
 ```
@@ -155,33 +162,6 @@ With :
 - `blog_path` : Blog repository absolute path
 - `blog` : Blog link
 
-
-### Pyto shortcuts
-To use the shortcuts, you need : 
-- [Pyto](https://apps.apple.com/fr/app/pyto-python-3/id1436650069)
-- [Toolbox Pro](https://apps.apple.com/fr/app/toolbox-pro-for-shortcuts/id1476205977)
-
-⚠️ You need to install YAFPA via pip, and configure it with `yafpa --config` (in module run) or, using repl :
-
-```python
-
-from YAFPA import __main__
-
-__main__.mobile_shortcuts("--c")
-``` 
-
-The config file is stored in the **pyto folder**. You can directly change the file using textastic or a-shell. 
-
-The main shortcut is on RoutineHub (more practical for version update) : [share one file](https://routinehub.co/shortcut/10044/)
-(it's equivalent to `share <filepath>`)
-
-There are another shortcut to "share all" files : [Share all true file in vault](https://routinehub.co/shortcut/10045/)
-(it's equivalent to `share` without arguments)
-
-
-### a-shell
-⚠️ For the moment, I can't update this shortcuts, because of a bug. 
-
 To use the [shortcuts](https://routinehub.co/shortcut/10151/), you need :
 - [a-shell](https://holzschu.github.io/a-Shell_iOS/) (Free)
 - [Working Copy](https://workingcopyapp.com/)
@@ -189,7 +169,12 @@ To use the [shortcuts](https://routinehub.co/shortcut/10151/), you need :
 Before running the shortcuts, you need to install all requirements, aka :
 ```
 pip install yafpa
+yafpa --C
 ```
+
+Links : 
+- [Share All File](https://routinehub.co/shortcut/10151/)
+- [Share One File](https://routinehub.co/shortcut/10475/)
 
 For the moment I can't create a shortcut to share only one file, BUT! You can use `a-shell` as you do in a normal terminal, aka : 
 ```
