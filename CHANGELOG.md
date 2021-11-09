@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.56.0 (2021-11-09)
+### Feature
+* Update emoji admonition ([`571fc85`](https://github.com/Mara-Li/YAFPA-python/commit/571fc858d2161b0f3cfc79fbe3ee9840f97e53b8))
+
 ## v1.55.1 (2021-11-08)
 ### Feature
 * Added a way to have custom admonition ! ([`1c71bcd`](https://github.com/Mara-Li/YAFPA-python/commit/1c71bcdd2933c2c7fcf5c9ad088011068be4db44))
