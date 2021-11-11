@@ -1,5 +1,6 @@
 import os
 import re
+from itertools import cycle
 from pathlib import Path
 
 import yaml
@@ -123,18 +124,27 @@ def admonition_trad(file_data):
         "quote",
         "cite",
     ]
+
     for i in range(0, len(file_data)):
         if re.search("[`?!]{3}( ?)ad-(.*)", file_data[i]):
             start = i
             start_list.append(start)
-        elif re.match("```", file_data[i]) or re.match("--- admonition", file_data[i]):
+        elif re.match("^```$", file_data[i]) or re.match("--- admonition", file_data[i]):
             end = i
             end_list.append(end)
-    for i, j in zip(start_list, end_list):
-        code = {code_index: (i, j)}
-        code_index = code_index + 1
-        code_dict.update(code)
-
+    if len(start_list) < len(end_list):
+        merged = zip(cycle(start_list), end_list)
+    elif len(end_list) < len(start_list):
+        merged = zip(start_list, cycle(end_list))
+    else:
+        merged = zip(start_list, end_list)
+    for i, j in merged:
+        print(i,j)
+        if j > i:
+            code = {code_index: (i, j)}
+            code_index = code_index + 1
+            code_dict.update(code)
+    print(code_dict)
     offset_for_title = 0
     for ad, ln in code_dict.items():
         ad_start = ln[0] + offset_for_title
@@ -160,8 +170,10 @@ def admonition_trad(file_data):
         file_data[ad_start] = re.sub(
             "[`!?]{3}( ?)ad-(.*)", first_block, file_data[ad_start]
         )
+        print(file_data[ad_start], file_data[ad_end])
+        if re.search(first_block, file_data[ad_start]):
+            file_data[ad_end] = "  "
 
-        file_data[ad_end] = "  \n"
         for i in range(ad_start, ad_end):
             file_data[i] = admonition_trad_content(file_data[i], type)
 

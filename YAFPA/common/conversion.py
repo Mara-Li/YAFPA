@@ -129,6 +129,8 @@ def file_convert(file, folder, option=0):
         final_text = links.excalidraw_convert(final_text)
         if re.search("\^\w+", final_text) and not re.search("\[\^\w+\]", final_text):
             final_text = re.sub("\^\w+", "", final_text)  # remove block id
+        if '```mermaid' in final_text:
+            final_text = final_text.replace('```mermaid', '```mermaid!')
         if "embed" in meta.keys() and meta["embed"] == False:
             final_text = links.convert_to_wikilink(final_text)
             final_text = links.convert_no_embed(final_text)
