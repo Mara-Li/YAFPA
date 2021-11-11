@@ -12,10 +12,10 @@ web = settings.web
 
 
 def remove_frontmatter(meta):
-    meta.pop("date", None)
     meta.pop("title", None)
     meta.pop("update", None)
     meta.pop("link", None)
+    meta.pop("date", None)
     return meta
 
 
@@ -25,8 +25,9 @@ def frontmatter_check(filename, folder):
     metadata.close()
     final = open(Path(f"{folder}/{filename}"), "w", encoding="utf-8")
     now = datetime.now().strftime("%d-%m-%Y")
-    if not "update" in meta.keys() or ("update" in meta.keys() and meta["update"] != False) or "date" not in meta.keys:
-        meta["date"] = now
+    if not "update" in meta.keys() or ("update" in meta.keys() and meta["update"] != False):
+        if not "date" in meta.keys():
+            meta["date"] = now
     if not "title" in meta.keys():
         meta["title"] = filename.replace(".md", "")
     update = frontmatter.dumps(meta)
