@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.0 (2021-11-11)
+### Fix
+* Fix date ([`c93c1de`](https://github.com/Mara-Li/YAFPA-python/commit/c93c1de83035f97664ffbd7920eca4ae7244acb1))
+
 ## v2.1.0 (2021-11-11)
 
 
