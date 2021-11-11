@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.0 (2021-11-11)
+
+
 ## v2.0.2 (2021-11-11)
 ### Fix
 * Don't update date if there is a date key ([`b6b6307`](https://github.com/Mara-Li/YAFPA-python/commit/b6b63078db29f941b653dcfeeda21a0f1dafaf19))
