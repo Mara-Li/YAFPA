@@ -86,7 +86,7 @@ The script :
 - Edit link to support transluction (if not `embed: False`)
 - Remove block id (no support)
 - Add CSS settings for inline tags (no link support) ; Tags are : class = .hash ; id = #tag_name (so you can style each tags you use)
-- Frontmatter :  Update the date. If there is already a `date` key, save it to `created` and update `date`.
+- Frontmatter :  Update the date if there is no date in frontmatter
 - Frontmatter : In absence of title, add the file's title.
 - Copy the link to your clipboard if one file is edited.
 - ⭐ Admonition conversion to "callout inspired notion"
@@ -111,7 +111,6 @@ Some information about this :
 - `share: true` : Share the file
 - `embed: false` : remove the transluction (convert to normal wikilinks)
 - `update: false` : Don't update the file at all after the first push
-- `current: false` : Don't update the date
 - `folder` : Use a different folder than `_note` ([here some more information](https://github.com/Mara-Li/yet-another-free-publish-alternative#folder-options)) 
 
 ### Admonition 
