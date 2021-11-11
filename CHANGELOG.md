@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.1 (2021-11-11)
+### Fix
+* Fix admonition and code blocks ([`e29fee1`](https://github.com/Mara-Li/YAFPA-python/commit/e29fee1bba2bbfb5f3c4ae8fde640f27aec1e9d0))
+
 ## v2.0.0 (2021-11-11)
 
 
