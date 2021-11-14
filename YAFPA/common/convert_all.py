@@ -154,8 +154,8 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
         commit = add + rm
         if git is False:
             if len(new_files) == 1:
-                md = "".join(new_files)
-                commit = md
+                commit = "".join(new_files)
+                md = commit[commit.find(':')+2:commit.rfind('in')-1]
                 convert.clipboard(md, priv)
             commit = f"Updated : \n {commit}"
             global_value.git_push(commit)
