@@ -60,10 +60,14 @@ def admonition_logo(type, line):
         "quote": "🗨️",
         "cite": "🗨️",
     }
-    admonition_custom = Path(f"{BASEDIR}/custom_admonition.yml")
     custom={}
+    admonition_custom = False
+    if os.path.exists( Path(f"{BASEDIR}/assets/script/custom_admonition.yml")):
+        admonition_custom =  Path(f"{BASEDIR}/assets/script/custom_admonition.yml")
+    elif os.path.exists( Path(f"{BASEDIR}/custom_admonition.yml")):
+        admonition_custom = Path(f"{BASEDIR}/custom_admonition.yml")
 
-    if os.path.exists(admonition_custom):
+    if admonition_custom:
         with open(admonition_custom, "r", encoding="utf-8") as stream:
             try:
                 custom = yaml.safe_load(stream)
