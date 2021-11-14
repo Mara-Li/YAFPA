@@ -42,6 +42,20 @@ def diff_file(file, folder, update=0):
     else:
         return True  # Si le fichier existe pas, il peut pas être identique
 
+def exclude_folder(filepath):
+    #Exclude file if folder is in the YAML "exclude_folder" configuration (assets/script/exclude_folder.yml)
+    config_folder = Path(f"{BASEDIR}/assets/script/exclude_folder.yml")
+    if os.path.exists(config_folder):
+        with open(config_folder, 'r', encoding='utf-8') as config:
+            try:
+                folder = yaml.safe_load(config)
+            except yaml.YAMLError as exc:
+                print(exc)
+                exit(1)
+    return any(file in filepath for file in folder)
+    # True if excluded
+    # False if not excluded
+
 
 def search_share(option=0, stop_share=1):
     filespush = []
@@ -50,7 +64,7 @@ def search_share(option=0, stop_share=1):
     for sub, dirs, files in os.walk(Path(vault)):
         for file in files:
             filepath = sub + os.sep + file
-            if filepath.endswith(".md") and "excalidraw" not in filepath:
+            if filepath.endswith(".md") and "excalidraw" not in filepath and not exclude_folder(filepath):
                 try:
                     yaml_front = frontmatter.load(filepath)
                     if "folder" in yaml_front.keys():
