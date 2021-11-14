@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.1 (2021-11-14)
+### Fix
+* Little fix for clipboard in convert all ([`e9fc266`](https://github.com/Mara-Li/YAFPA-python/commit/e9fc266f7ac5f1ae6b35624a6d426b140d181e35))
+
 ## v2.3.0 (2021-11-14)
 ### Feature
 * Exclude folder ([`b319bbe`](https://github.com/Mara-Li/YAFPA-python/commit/b319bbe6725d41683902359cf6a2484cea190b09))
