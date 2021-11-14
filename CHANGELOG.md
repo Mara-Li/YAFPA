@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.0 (2021-11-14)
+### Feature
+* Exclude folder ([`b319bbe`](https://github.com/Mara-Li/YAFPA-python/commit/b319bbe6725d41683902359cf6a2484cea190b09))
+* Move admonition ([`96a4bf3`](https://github.com/Mara-Li/YAFPA-python/commit/96a4bf34e607a6105e49570671a43d20e83537de))
+
+### Breaking
+* Move admonition ([`96a4bf3`](https://github.com/Mara-Li/YAFPA-python/commit/96a4bf34e607a6105e49570671a43d20e83537de))
+
 ## v2.2.0 (2021-11-11)
 ### Fix
 * Fix date ([`c93c1de`](https://github.com/Mara-Li/YAFPA-python/commit/c93c1de83035f97664ffbd7920eca4ae7244acb1))
