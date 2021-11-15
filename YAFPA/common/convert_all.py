@@ -44,6 +44,8 @@ def diff_file(file, folder, update=0):
 
 def exclude_folder(filepath):
     #Exclude file if folder is in the YAML "exclude_folder" configuration (assets/script/exclude_folder.yml)
+    # True if excluded
+    # False if not excluded
     config_folder = Path(f"{BASEDIR}/assets/script/exclude_folder.yml")
     if os.path.exists(config_folder):
         with open(config_folder, 'r', encoding='utf-8') as config:
@@ -52,9 +54,8 @@ def exclude_folder(filepath):
             except yaml.YAMLError as exc:
                 print(exc)
                 exit(1)
-    return any(file in filepath for file in folder)
-    # True if excluded
-    # False if not excluded
+        return any(file in filepath for file in folder)
+    return False
 
 
 def search_share(option=0, stop_share=1):
