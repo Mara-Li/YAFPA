@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.3 (2021-11-15)
+### Fix
+* :bug: Fix # conversion in links. ([`5ab5059`](https://github.com/Mara-Li/YAFPA-python/commit/5ab50596a50d865bc990fa22de172d5acd129de9))
+
 ## v2.3.2 (2021-11-15)
 
 
