@@ -151,7 +151,7 @@ def file_convert(file, folder, option=0):
             final_text = ""
         elif re.search("[!?]{3}ad-\w+", final_text):
             final_text = final_text.replace("  \n", "\n")
-        if re.search("#\w+", final_text) and not re.search("`#\w+`", final_text):
+        if re.search("#\w+", final_text) and not re.search("(`|\[{2})(.*)#(.*)(`|\]{2})", final_text):
             final_text = convert_hashtags(final_text)
         elif re.search("\{\: (id=|class=|\.).*\}", final_text):
             IAL = re.search("\{\: (id=|class=|\.).*\}", final_text)
