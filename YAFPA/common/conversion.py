@@ -124,10 +124,10 @@ def file_convert(file, folder, option=0):
     lines = adm.admonition_trad(lines)
     for ln in lines:
         final_text = ln.replace("  \n", "\n")
-        if not final_text.strip().endswith("%%") or not final_text.strip().startswith("%%"):
+        if not final_text.strip().endswith("%%") and not final_text.strip().startswith("%%"):
             #skip comment
             final_text = final_text.replace("\n", "  \n")
-            final_text = links.link_image_conversion(final_text, meta)
+            final_text = links.link_image_conversion(final_text, meta, os.path.basename(file))
 
             if not '`' in final_text:
                 final_text = re.sub("\%{2}(.*)\%{2}", "", final_text)
@@ -147,7 +147,7 @@ def file_convert(file, folder, option=0):
                 # Admonition space
                 final_text = final_text.replace("  \n", "\n")
 
-            if re.search("#\w+", final_text) and not re.search("(`|\[{2})(.*)#(.*)(`|\]{2})", final_text):
+            if re.search("#\w+", final_text) and not re.search("(`|\[{2}|\()(.*)#(.*)(`|\]{2}|\))", final_text):
                 # Hashtags
                 final_text = convert_hashtags(final_text)
 
