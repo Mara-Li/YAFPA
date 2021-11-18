@@ -119,6 +119,29 @@ def convert_to_wikilink(line):
                 line = final_text.replace(f.strip(), f"[{f.strip()}]({f.strip()})")
     return line
 
+def link_image_conversion(line, meta):
+    final_text = line
+    if re.search("(\[{2}|\[).*", final_text):
+        final_text = convert_to_wikilink(line)
+        final_text = excalidraw_convert(final_text)
+        if re.search("\^\w+", final_text) and not re.search("\[\^\w+\]", final_text):
+            # remove block id
+            final_text = re.sub("#\^\w+", "", final_text)
+        if "embed" in meta.keys() and meta["embed"] == False:
+            final_text = convert_no_embed(final_text)
+        else:
+            final_text = transluction_note(final_text)
+        if re.search('\[{2}(.*)#(.*)]{2}', final_text): #title working → Convertion for the blog
+            section = re.search('#(.*)]{2}',final_text)
+            section = section.group(1).lower()
+            section = re.sub('[^ \w\-\d_]', '', section)
+            section = section.lstrip()
+            section = re.sub('[^\w\d]', '-', section)
+            section = "#" + section + '-]]'
+            final_text = re.sub("#(.*)]{2}", section, final_text)
+        if not '\|' in final_text:
+            final_text = final_text.replace('|', '\|')
+    return final_text
 
 def transluction_note(line):
     # If file (not image) start with "![[" : transluction with rmn-transclude (exclude

@@ -1,13 +1,13 @@
 import os
 import re
-import sys
 from pathlib import Path
 
 import frontmatter
+import sys
 
 from YAFPA.common import (
     file_checking as check,
-    image_transform as links,
+    link_conversion as links,
     admonition as adm,
     metadata as mt,
     )
@@ -123,20 +123,16 @@ def file_convert(file, folder, option=0):
 
     lines = adm.admonition_trad(lines)
     for ln in lines:
-        if not final_text.strip().endswith("%%") or not final_text.strip().startswith("%%"): #skip comment 
-            final_text = ln.replace("  \n", "\n")
+        final_text = ln.replace("  \n", "\n")
+        if not final_text.strip().endswith("%%") or not final_text.strip().startswith("%%"):
+            #skip comment
             final_text = final_text.replace("\n", "  \n")
-            final_text = links.convert_to_wikilink(final_text)
-            final_text = links.excalidraw_convert(final_text)
-            if re.search("\^\w+", final_text) and not re.search("\[\^\w+\]", final_text):
-                final_text = re.sub("\^\w+", "", final_text)  # remove block id
-            if "embed" in meta.keys() and meta["embed"] == False:
-                final_text = links.convert_no_embed(final_text)
-            else:
-                final_text = links.transluction_note(final_text)
+            final_text = links.link_image_conversion(final_text, meta)
+
             if not '`' in final_text:
                 final_text = re.sub("\%{2}(.*)\%{2}", "", final_text)
-            if re.search(r"\\U\w+", final_text) and not "Users" in final_text:
+
+            if re.search(r"\\U\w+", final_text) and not "Users" in final_text: #Fix emoji if bug because of frontmatter
                 emojiz = re.search(r"\\U\w+", final_text)
                 emojiz = emojiz.group().strip().replace('"', "")
                 convert_emojiz = (
@@ -146,10 +142,15 @@ def file_convert(file, folder, option=0):
                     .decode("utf-16")
                 )
                 final_text = re.sub(r"\\U\w+", convert_emojiz, final_text)
+
             elif re.search("[!?]{3}ad-\w+", final_text):
+                # Admonition space
                 final_text = final_text.replace("  \n", "\n")
+
             if re.search("#\w+", final_text) and not re.search("(`|\[{2})(.*)#(.*)(`|\]{2})", final_text):
+                # Hashtags
                 final_text = convert_hashtags(final_text)
+
             elif re.search("\{\: (id=|class=|\.).*\}", final_text):
                 IAL = re.search("\{\: (id=|class=|\.).*\}", final_text)
                 contentIAL = re.search("(.*)\{", final_text)
@@ -180,14 +181,8 @@ def file_convert(file, folder, option=0):
                 "\\\\", final_text.strip()
             ):  # New line when using "\" in obsidian file
                 final_text = "  \n"
-            elif re.search("(\[{2}|\[).*", final_text):
-                # Escape pipe for link name
-                final_text = final_text.replace("|", "\|")
-                # Remove block ID (because it doesn't work)
-                final_text = re.sub("#\^(.*)]]", "]]", final_text)
-                final_text = final_text + "  "
             final.append(final_text)
-    meta_list = [(f"{k}: {v}  \n") for k, v in meta.metadata.items()]
+    meta_list = [f"{k}: {v}  \n" for k, v in meta.metadata.items()]
     meta_list.insert(0, "---  \n")
     meta_list.insert(len(meta_list) + 1, "---  \n")
     final = meta_list + final
