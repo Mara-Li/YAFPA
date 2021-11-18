@@ -119,7 +119,46 @@ def convert_to_wikilink(line):
                 line = final_text.replace(f.strip(), f"[{f.strip()}]({f.strip()})")
     return line
 
-def link_image_conversion(line, meta):
+
+
+def heading_conversion(final_text, line, title):
+    title = title.replace('.md', '')
+    if re.search(
+            '\[{2}(.*)#(.*)]{2}', final_text
+            ):  # title working → Convertion for the blog
+        # Need to be converted to []() links
+        link = re.search('\[{2}(.*)#(.*)]{2}', final_text)
+        file_name = re.search('\[{2}(.*)#', final_text)
+        file_name = file_name.group().replace('#', '').replace('[', '')
+        if re.search('\|', final_text):
+            # get headings
+            heading = re.search('\|(.*)\]{2}', final_text).group().replace(']', '')
+
+            heading = '[' + heading.replace('|', '') + ']'
+        else:
+            heading = ""
+        # [heading](link !) → #things
+
+        link = re.search('#(.*)(\|)?', link.group())
+        if heading == "":
+            title = link.group(0).lstrip()
+            title = title.replace(']', '')
+            title = title.replace('#', '')
+            heading = '[' + title + ']'
+        link = link.group(1).lower()
+        link = re.sub('\|(.*)', '', link)
+        section = re.sub('[^ \w\-\d_]', '', link)
+        section = re.sub('[^\w\d]', '-', section)
+        if file_name != title :
+            final_text = heading + '('+ file_name +'#' + section + ')'
+        else:
+            final_text = heading + '(#' + section + ')'
+        final_text = re.sub('\[{2}(.*)\]{2}', final_text, line)
+
+
+    return final_text
+
+def link_image_conversion(line, meta, title):
     final_text = line
     if re.search("(\[{2}|\[).*", final_text):
         final_text = convert_to_wikilink(line)
@@ -127,18 +166,12 @@ def link_image_conversion(line, meta):
         if re.search("\^\w+", final_text) and not re.search("\[\^\w+\]", final_text):
             # remove block id
             final_text = re.sub("#\^\w+", "", final_text)
+
         if "embed" in meta.keys() and meta["embed"] == False:
             final_text = convert_no_embed(final_text)
         else:
             final_text = transluction_note(final_text)
-        if re.search('\[{2}(.*)#(.*)]{2}', final_text): #title working → Convertion for the blog
-            section = re.search('#(.*)]{2}',final_text)
-            section = section.group(1).lower()
-            section = re.sub('[^ \w\-\d_]', '', section)
-            section = section.lstrip()
-            section = re.sub('[^\w\d]', '-', section)
-            section = "#" + section + '-]]'
-            final_text = re.sub("#(.*)]{2}", section, final_text)
+        final_text = heading_conversion(final_text, line, title)
         if not '\|' in final_text:
             final_text = final_text.replace('|', '\|')
     return final_text
