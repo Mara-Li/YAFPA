@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.5 (2021-11-18)
+### Fix
+* Fix link heading generation ([`40ed7ce`](https://github.com/Mara-Li/YAFPA-python/commit/40ed7ceb642525eab4baa3ce0680237823a73f7f))
+* Hashtag in linked header ([`071ac60`](https://github.com/Mara-Li/YAFPA-python/commit/071ac608777f5df17dfe3e1391bf1949ad653087))
+
 ## v2.3.4 (2021-11-18)
 ### Fix
 * Fix link generation ([`53d8d84`](https://github.com/Mara-Li/YAFPA-python/commit/53d8d84504c79c49a79a563bc3a99a18355f12fb))
