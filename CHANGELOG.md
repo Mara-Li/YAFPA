@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.4.0 (2021-11-19)
+### Feature
+* Link not exist ([`2386818`](https://github.com/Mara-Li/YAFPA-python/commit/23868183261506bf2119c2cfa4db87bc867087ed))
+
 ## v2.3.5 (2021-11-18)
 ### Fix
 * Fix link heading generation ([`40ed7ce`](https://github.com/Mara-Li/YAFPA-python/commit/40ed7ceb642525eab4baa3ce0680237823a73f7f))
