@@ -4,6 +4,7 @@ import shutil
 
 import unidecode
 
+from YAFPA.common import file_checking as checking
 from YAFPA.common import global_value as settings
 
 vault = settings.vault
@@ -121,8 +122,8 @@ def convert_to_wikilink(line):
 
 
 
-def heading_conversion(final_text, line, title):
-    title = title.replace('.md', '')
+def heading_conversion(final_text, line, title, all_file, folder):
+    file = title.replace('.md', '')
     if re.search(
             '\[{2}(.*)#(.*)]{2}', final_text
             ):  # title working → Convertion for the blog
@@ -149,8 +150,12 @@ def heading_conversion(final_text, line, title):
         link = re.sub('\|(.*)', '', link)
         section = re.sub('[^ \w\-\d_]', '', link)
         section = re.sub('[^\w\d]', '-', section)
-        if file_name != title :
-            final_text = heading + '('+ file_name +'#' + section + ')'
+        if file_name != file :
+            file_name_pattern = file_name + '.md'
+            check = checking.check_file(file_name_pattern, folder, all_file)
+            final_text = heading + '(' + file_name.replace(' ', '-') + '#' + section + ')'
+            if check == "NE":
+                final_text = "**" + final_text + "**{: .link_error}"
         else:
             final_text = heading + '(#' + section + ')'
         final_text = re.sub('\[{2}(.*)\]{2}', final_text, line)
@@ -158,7 +163,7 @@ def heading_conversion(final_text, line, title):
 
     return final_text
 
-def link_image_conversion(line, meta, title):
+def link_image_conversion(line, meta, title, all_file, folder):
     final_text = line
     if re.search("(\[{2}|\[).*", final_text):
         final_text = convert_to_wikilink(line)
@@ -171,7 +176,7 @@ def link_image_conversion(line, meta, title):
             final_text = convert_no_embed(final_text)
         else:
             final_text = transluction_note(final_text)
-        final_text = heading_conversion(final_text, line, title)
+        final_text = heading_conversion(final_text, line, title, all_file, folder)
         if not '\|' in final_text:
             final_text = final_text.replace('|', '\|')
     return final_text

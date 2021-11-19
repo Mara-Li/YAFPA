@@ -12,6 +12,7 @@ def convert_one(ori, delopt, git):
     file_name = os.path.basename(ori).upper()
     yaml_front = frontmatter.load(ori)
     priv = "_notes"
+    all_file = checkFile.all_file()
     if "folder" in yaml_front.keys():
         priv = yaml_front["folder"]
         priv = checkFile.check_folder(priv)
@@ -26,7 +27,7 @@ def convert_one(ori, delopt, git):
         print(
             f"[{datetime.now().strftime('%H:%M:%S')}] STARTING CONVERT [{file_name}] OPTIONS :\n- PRESERVE"
         )
-    contents = convert.file_convert(ori, priv, 1)
+    contents = convert.file_convert(ori, priv, all_file, 1)
     check = convert.file_write(ori, contents, priv)
     if check and not git:
         COMMIT = f"Pushed {file_name.lower()} to blog"

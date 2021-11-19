@@ -16,16 +16,16 @@ BASEDIR = global_value.BASEDIR
 vault = global_value.vault
 
 
-def diff_file(file, folder, update=0):
+def diff_file(file, folder, all_file, update=0):
     file_name = os.path.basename(file)
-    if checkFile.check_file(file_name, folder) == "EXIST":
+    if checkFile.check_file(file_name, folder,all_file) == "EXIST":
         if update == 1:  # Update : False / Don't check
             return False
         notes_path = Path(f"{folder}/{file_name}")
         retro_old = checkFile.retro(notes_path)
         meta_old = frontmatter.load(notes_path)
         meta_old = mt.remove_frontmatter(meta_old.metadata)
-        temp = convert.file_convert(file, folder)
+        temp = convert.file_convert(file, folder, all_file)
         try:
             front_temp = frontmatter.loads("".join(temp))
         except yaml.parser.ParserError:
@@ -62,6 +62,7 @@ def search_share(option=0, stop_share=1):
     filespush = []
     check = False
     folder = "_notes"
+    all_file=checkFile.all_file()
     for sub, dirs, files in os.walk(Path(vault)):
         for file in files:
             filepath = sub + os.sep + file
@@ -82,15 +83,15 @@ def search_share(option=0, stop_share=1):
                                 update = 1
                             else:
                                 update = 0
-                            if diff_file(filepath, folder, update):
+                            if diff_file(filepath, folder, all_file, update):
                                 checkFile.delete_file(filepath, folder)
-                                contents = convert.file_convert(filepath, folder)
+                                contents = convert.file_convert(filepath, folder, all_file)
                                 check = convert.file_write(filepath, contents, folder)
                             else:
                                 check = convert.file_write(filepath, "0", folder)
                         elif option == 2:
                             checkFile.delete_file(filepath, folder)
-                            contents = convert.file_convert(filepath, folder)
+                            contents = convert.file_convert(filepath, folder, all_file)
                             check = convert.file_write(filepath, contents, folder)
                         destination = checkFile.dest(filepath, folder)
                         msg_folder = os.path.basename(folder)

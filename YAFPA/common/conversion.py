@@ -101,7 +101,7 @@ def convert_hashtags(final_text):
     return final_text
 
 
-def file_convert(file, folder, option=0):
+def file_convert(file, folder, all_file, option=0):
     final = []
     path_folder = str(folder).replace(f"{BASEDIR}", "")
     path_folder = path_folder.replace(os.sep, "")
@@ -127,7 +127,7 @@ def file_convert(file, folder, option=0):
         if not final_text.strip().endswith("%%") and not final_text.strip().startswith("%%"):
             #skip comment
             final_text = final_text.replace("\n", "  \n")
-            final_text = links.link_image_conversion(final_text, meta, os.path.basename(file))
+            final_text = links.link_image_conversion(final_text, meta, os.path.basename(file), all_file, folder)
 
             if not '`' in final_text:
                 final_text = re.sub("\%{2}(.*)\%{2}", "", final_text)
