@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.0 (2021-11-26)
+### Feature
+* :sparkles: mermaid support ([`458ae37`](https://github.com/Mara-Li/YAFPA-python/commit/458ae37550dd039f71392e9494969476f89e9498))
+
 ## v2.4.0 (2021-11-19)
 ### Feature
 * Link not exist ([`2386818`](https://github.com/Mara-Li/YAFPA-python/commit/23868183261506bf2119c2cfa4db87bc867087ed))
