@@ -147,6 +147,11 @@ def file_convert(file, folder, all_file, option=0):
                 # Admonition space
                 final_text = final_text.replace("  \n", "\n")
 
+            
+            elif re.search("```mermaid\s+", final_text):
+                # Convert to jekyll-support mermaid format
+                final_text = final_text.replace("```mermaid", "```mermaid!")
+
             if re.search("#\w+", final_text) and not re.search("(`|\[{2}|\()(.*)#(.*)(`|\]{2}|\))", final_text):
                 # Hashtags
                 final_text = convert_hashtags(final_text)
