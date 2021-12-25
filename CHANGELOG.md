@@ -2,10 +2,6 @@
 
 <!--next-version-placeholder-->
 
-## v2.5.1 (2021-12-25)
-### Fix
-* Fix Heading IAL and add IAL line return ([`feb8e20`](https://github.com/Mara-Li/YAFPA/commit/feb8e20d949b0504698b5e9fdf6a7e14fee841b3))
-
 ## v2.5.0 (2021-11-26)
 ### Feature
 * :sparkles: mermaid support ([`458ae37`](https://github.com/Mara-Li/YAFPA-python/commit/458ae37550dd039f71392e9494969476f89e9498))
