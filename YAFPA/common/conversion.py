@@ -87,7 +87,12 @@ def convert_hashtags(final_text):
     for i in range(0, len(token)):
         if token[i] in css:
             final_text = final_text.replace(token[i], "")
-            IAL = "**" + final_text.strip() + "**{: " + token[i] + "}"
+            if final_text.startswith('#'):
+                heading = re.findall('#', final_text)
+                heading = ''.join(heading)
+                IAL = heading + " **" + final_text.replace('#', '').strip() + "**{: " + token[i] + "}  \n"
+            else:
+                IAL = "**" + final_text.strip() + "**{: " + token[i] + "}  \n"
             final_text = final_text.replace(final_text, IAL)
         else:
             IAL = (
@@ -95,7 +100,7 @@ def convert_hashtags(final_text):
                 + token[i].replace("#", " ").strip()
                 + "**{: "
                 + token[i].strip()
-                + "}{: .hash}"
+                + "}{: .hash}  \n"
             )
             final_text = final_text.replace(token[i], IAL, 1)
     return final_text
