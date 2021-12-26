@@ -194,7 +194,10 @@ def file_convert(file, folder, all_file, option=0):
                 final_text = "  \n"
             final.append(final_text)
     category = meta.metadata['category'].split('/')
-    meta.metadata['category'] = category[1]
+    if len(category) > 1:
+        meta.metadata['category'] = category[1]
+    else:
+        meta.metadata['category'] = category[0]
     meta_list = [f"{k}: {v}  \n" for k, v in meta.metadata.items()]
     meta_list.insert(0, "---  \n")
     meta_list.insert(len(meta_list) + 1, "---  \n")
