@@ -155,11 +155,13 @@ Here is a blank sheet to help you if you want to manually write / edit it :
 vault=
 blog_path=
 blog=
+share=
 ```
 With :
 - `vault`: Vault Absolute Path
 - `blog_path` : Blog repository absolute path
 - `blog` : Blog link
+- `share` : your wanted share key ; by default : `share`
 
 To use the [shortcuts](https://routinehub.co/shortcut/10151/), you need :
 - [a-shell](https://holzschu.github.io/a-Shell_iOS/) (Free)
@@ -207,10 +209,9 @@ date: 12-11-2021•
 embed: true•
 update: true•
 current: true•
-folder: notes•
 flux: true•
 share: false 
-category: Notes
+category: folder/category (category can be false)
 description: my awesome file
 ```
 You can use MetaEdit / Supercharged links to quickly update the front matter. 
