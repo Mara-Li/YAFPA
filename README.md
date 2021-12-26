@@ -111,7 +111,11 @@ Some information about this :
 - `share: true` : Share the file
 - `embed: false` : remove the transluction (convert to normal wikilinks)
 - `update: false` : Don't update the file at all after the first push
-- `folder` : Use a different folder than `_note` ([here some more information](https://github.com/Mara-Li/yet-another-free-publish-alternative#folder-options)) 
+- `folder` : Use a different folder than `_note` ([here some more information](https://github.com/Mara-Li/yet-another-free-publish-alternative#folder-options))
+Alternatively, you can use the `category` key : `category: folder/category`
+    - `folder` is optional ; as default : `_notes`
+    -  `category` can be `false` to prevent apparence in the feed
+NB : if `category` and `folder` is used at the same time, `folder` will be used as the folder. 
 
 ### Admonition 
 As admonition is very tricky, I choose to convert all admonition to a "callout Notion".
