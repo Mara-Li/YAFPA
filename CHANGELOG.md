@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.0 (2021-12-26)
+### Feature
+* **metadata:** Change folder working and add a config option for the share key ([`0a3ce81`](https://github.com/Mara-Li/YAFPA/commit/0a3ce81a3d1db6db4eb1d312a528a51947d4ae7c))
+
+### Fix
+* **metadata:** Prevent breaking index ([`7f71484`](https://github.com/Mara-Li/YAFPA/commit/7f7148428a9ecf779fb35e939b34771356c43f4e))
+
+### Breaking
+* - the 'share' metadata key can be changed in the environnement settings.   - The 'folder' key is now optional : you can configure folder with the 'category' key using "category: Folder/category" ; to configure folder without category : "folder/false" will work.  ([`0a3ce81`](https://github.com/Mara-Li/YAFPA/commit/0a3ce81a3d1db6db4eb1d312a528a51947d4ae7c))
+
+### Documentation
+* **readme:** Update docs for the new metadata option ([`a24fab9`](https://github.com/Mara-Li/YAFPA/commit/a24fab958f5063f9a6ca2ab81e58c1adbc1e41ab))
+* **readme:** Update docs for the new metadata option ([`01eb78e`](https://github.com/Mara-Li/YAFPA/commit/01eb78e24300503d19a788788c6e868192c7349b))
+* **readme:** Update docs for metadata ([`b70a0a3`](https://github.com/Mara-Li/YAFPA/commit/b70a0a30f75460fd76152556fc18e56647d01539))
+
 ## v2.5.1 (2021-12-25)
 ### Fix
 * Fix Heading IAL and add IAL line return ([`feb8e20`](https://github.com/Mara-Li/YAFPA/commit/feb8e20d949b0504698b5e9fdf6a7e14fee841b3))
