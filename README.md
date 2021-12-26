@@ -214,9 +214,18 @@ embed: true•
 update: true•
 current: true•
 flux: true•
-share: false 
+share: false (this key can be changed in the configuration)
 category: folder/category (category can be false)
 description: my awesome file
 ```
 You can use MetaEdit / Supercharged links to quickly update the front matter. 
 
+## Exemple of frontmatter :
+```yml
+category: Roleplay/Application
+date: 21-12-2021
+share: true
+tag: RP/Darkness-Haunted/Application/PC
+title: (Darkness Haunted) Alwyn Kallendris
+```
+The file will be added in the `Roleplay` folder ; and the `Application` will now show the file in the sidebar, the Roleplay page and the collections page. 
