@@ -16,6 +16,10 @@ def convert_one(ori, delopt, git):
     if "folder" in yaml_front.keys():
         priv = yaml_front["folder"]
         priv = checkFile.check_folder(priv)
+    elif "category" in yaml_front.keys():
+        cat = yaml_front['category'].split("/")
+        priv = cat[0]
+        priv = checkFile.check_folder(priv)
     else:
         priv = Path(f"{gl.BASEDIR}/{priv}")
     if delopt is False:

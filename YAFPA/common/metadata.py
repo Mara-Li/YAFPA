@@ -43,6 +43,7 @@ def update_frontmatter(file, folder, share=0, link=1):
     folder_key = str(folder).replace(f"{BASEDIR}", "")
     folder_key = folder_key.replace(os.sep, "")
     folder_key = folder_key.replace("_", "")
+    share = settings.share
     if "tag" in meta.keys():
         tag = meta["tag"]
     elif "tags" in meta.keys():
@@ -64,9 +65,9 @@ def update_frontmatter(file, folder, share=0, link=1):
         elif (
             link == 1
             and share == 1
-            and ("share" not in meta.keys() or meta["share"] == "false")
+            and (share not in meta.keys() or meta[share] == "false")
         ):
-            meta["share"] = "true"
+            meta[share] = "true"
         if tag != "":
             meta["tag"] = tag
         update = frontmatter.dumps(meta, sort_keys=False)

@@ -31,14 +31,16 @@ try:
     BASEDIR = Path(env["blog_path"]).expanduser()
     vault = Path(env["vault"]).expanduser()
     web = env["blog"]
+    share = env['share']
 except KeyError:
     with open(env_path) as f:
-        vault_str = "".join(f.readlines(1)).replace("vault=", "")
-        basedir_str = "".join(f.readlines(2)).replace("blog_path=", "")
+        vault_str = "".join(f.readlines(1)).replace("vault=", "").rstrip()
+        basedir_str = "".join(f.readlines(2)).replace("blog_path=", "").rstrip()
 
         vault = Path(vault_str)
         BASEDIR = Path(basedir_str)
         web = "".join(f.readlines(3)).replace("blog=", "")
+        share = "".join(f.readlines(4)).replace('share=', "")
     if len(vault_str) == 0 or len(basedir_str) == 0 or len(web) == 0:
         print("Please provide a valid path for all config items")
         exit(1)
@@ -46,7 +48,7 @@ except RuntimeError:
     BASEDIR = Path(env["blog_path"])
     vault = Path(env["vault"])
     web = env["blog"]
-
+    share = env["share"]
 try:
     vault = vault.expanduser()
     BASEDIR = BASEDIR.expanduser()
@@ -54,6 +56,8 @@ except RuntimeError:
     print("Please, provid a valid path for all config item.")
     exit(1)
 
+if len(share) == 0:
+    share = "share"
 path = Path(f"{BASEDIR}/.git")  # GIT SHARED
 post = Path(f"{BASEDIR}/_notes")
 img = Path(f"{BASEDIR}/assets/img/")

@@ -63,6 +63,7 @@ def search_share(option=0, stop_share=1):
     check = False
     folder = "_notes"
     all_file=checkFile.all_file()
+    share_key = global_value.share
     for sub, dirs, files in os.walk(Path(vault)):
         for file in files:
             filepath = sub + os.sep + file
@@ -71,10 +72,11 @@ def search_share(option=0, stop_share=1):
                     yaml_front = frontmatter.load(filepath)
                     if "folder" in yaml_front.keys():
                         folder = yaml_front["folder"]
-                        folder = checkFile.check_folder(folder)
-                    else:
-                        folder = checkFile.check_folder("_notes")
-                    if "share" in yaml_front.keys() and yaml_front["share"] is True:
+                    elif "category" in yaml_front.keys():
+                        cat = yaml_front["category"].split('/')
+                        folder = cat[0]
+                    folder = checkFile.check_folder(folder)
+                    if share_key in yaml_front.keys() and yaml_front[share_key] is True:
                         if option == 1:
                             if (
                                 "update" in yaml_front.keys()

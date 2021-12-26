@@ -113,9 +113,10 @@ def file_convert(file, folder, all_file, option=0):
     path_folder = path_folder.replace("_", "")
     meta = frontmatter.load(file)
     lines = meta.content.splitlines(True)
+    share = settings.share
     if option == 1:
-        if "share" not in meta.keys() or meta["share"] is False:
-            meta["share"] = True
+        if share not in meta.keys() or meta[share] is False:
+            meta[share] = True
             update = frontmatter.dumps(meta)
             meta = frontmatter.loads(update)
             mt.update_frontmatter(file, folder, 1)
@@ -123,7 +124,7 @@ def file_convert(file, folder, all_file, option=0):
             mt.update_frontmatter(file, folder, 0)
     else:
         mt.update_frontmatter(file, folder, 0)
-        if "share" not in meta.keys() or meta["share"] is False:
+        if share not in meta.keys() or meta[share] is False:
             return final
 
     lines = adm.admonition_trad(lines)
@@ -192,6 +193,8 @@ def file_convert(file, folder, all_file, option=0):
             ):  # New line when using "\" in obsidian file
                 final_text = "  \n"
             final.append(final_text)
+    category = meta.metadata['category'].split('/')
+    meta.metadata['category'] = category[1]
     meta_list = [f"{k}: {v}  \n" for k, v in meta.metadata.items()]
     meta_list.insert(0, "---  \n")
     meta_list.insert(len(meta_list) + 1, "---  \n")

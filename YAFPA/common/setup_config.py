@@ -12,6 +12,7 @@ def create_env():
     vault = ""
     blog = ""
     blog_link = ""
+    share = "share"
     while vault == "":
         vault = str(input("Please provide your obsidian vault path : "))
     while blog == "":
@@ -20,7 +21,11 @@ def create_env():
         blog_link = str(
             input("Please provide the blog link (as https://yourblog.netlify.app) : ")
         )
+    share = str(input("Choose your share key name (default: share) : "))
+    if share == "":
+        share = "share"
     env.write(f"vault={vault}\n")
     env.write(f"blog_path={blog}\n")
     env.write(f"blog={blog_link}\n")
+    env.write(f"share={share}\n")
     env.close()
