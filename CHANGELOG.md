@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.1 (2021-12-27)
+### Fix
+* Fix metadata if 'category' don't exist ([`9a940e0`](https://github.com/Mara-Li/YAFPA/commit/9a940e0df64980d80e4342cba126874a66504da6))
+
 ## v3.0.0 (2021-12-26)
 ### Feature
 * **metadata:** Change folder working and add a config option for the share key ([`0a3ce81`](https://github.com/Mara-Li/YAFPA/commit/0a3ce81a3d1db6db4eb1d312a528a51947d4ae7c))
