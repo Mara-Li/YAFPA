@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.2 (2021-12-27)
+### Fix
+* Wrong fix ; real fix now ([`70dbad2`](https://github.com/Mara-Li/YAFPA/commit/70dbad28a262da7b1e71b3c0b73f46257bd6be82))
+
 ## v3.0.1 (2021-12-27)
 ### Fix
 * Fix metadata if 'category' don't exist ([`9a940e0`](https://github.com/Mara-Li/YAFPA/commit/9a940e0df64980d80e4342cba126874a66504da6))
