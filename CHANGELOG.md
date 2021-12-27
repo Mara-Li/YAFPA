@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.3 (2021-12-27)
+### Fix
+* A bunch of firewall in case of error ([`bce743b`](https://github.com/Mara-Li/YAFPA/commit/bce743b3a0d4db008f9884fa054db1f7d7c7ea4a))
+
 ## v3.0.2 (2021-12-27)
 ### Fix
 * Wrong fix ; real fix now ([`70dbad2`](https://github.com/Mara-Li/YAFPA/commit/70dbad28a262da7b1e71b3c0b73f46257bd6be82))
