@@ -121,47 +121,48 @@ def convert_to_wikilink(line):
     return line
 
 
-
 def heading_conversion(final_text, line, title, all_file, folder):
-    file = title.replace('.md', '')
+    file = title.replace(".md", "")
     if re.search(
-            '\[{2}(.*)#(.*)]{2}', final_text
-            ):  # title working → Convertion for the blog
+        "\[{2}(.*)#(.*)]{2}", final_text
+    ):  # title working → Convertion for the blog
         # Need to be converted to []() links
-        link = re.search('\[{2}(.*)#(.*)]{2}', final_text)
-        file_name = re.search('\[{2}(.*)#', final_text)
-        file_name = file_name.group().replace('#', '').replace('[', '')
-        if re.search('\|', final_text):
+        link = re.search("\[{2}(.*)#(.*)]{2}", final_text)
+        file_name = re.search("\[{2}(.*)#", final_text)
+        file_name = file_name.group().replace("#", "").replace("[", "")
+        if re.search("\|", final_text):
             # get headings
-            heading = re.search('\|(.*)\]{2}', final_text).group().replace(']', '')
+            heading = re.search("\|(.*)\]{2}", final_text).group().replace("]", "")
 
-            heading = '[' + heading.replace('|', '') + ']'
+            heading = "[" + heading.replace("|", "") + "]"
         else:
             heading = ""
         # [heading](link !) → #things
 
-        link = re.search('#(.*)(\|)?', link.group())
+        link = re.search("#(.*)(\|)?", link.group())
         if heading == "":
             title = link.group(0).lstrip()
-            title = title.replace(']', '')
-            title = title.replace('#', '')
-            heading = '[' + title + ']'
+            title = title.replace("]", "")
+            title = title.replace("#", "")
+            heading = "[" + title + "]"
         link = link.group(1).lower()
-        link = re.sub('\|(.*)', '', link)
-        section = re.sub('[^ \w\-\d_]', '', link)
-        section = re.sub('[^\w\d]', '-', section)
-        if file_name != file :
-            file_name_pattern = file_name + '.md'
+        link = re.sub("\|(.*)", "", link)
+        section = re.sub("[^ \w\-\d_]", "", link)
+        section = re.sub("[^\w\d]", "-", section)
+        if file_name != file:
+            file_name_pattern = file_name + ".md"
             check = checking.check_file(file_name_pattern, folder, all_file)
-            final_text = heading + '(' + file_name.replace(' ', '-') + '#' + section + ')'
+            final_text = (
+                heading + "(" + file_name.replace(" ", "-") + "#" + section + ")"
+            )
             if check == "NE":
                 final_text = "**" + final_text + "**{: .link_error}"
         else:
-            final_text = heading + '(#' + section + ')'
-        final_text = re.sub('\[{2}(.*)\]{2}', final_text, line)
-
+            final_text = heading + "(#" + section + ")"
+        final_text = re.sub("\[{2}(.*)\]{2}", final_text, line)
 
     return final_text
+
 
 def link_image_conversion(line, meta, title, all_file, folder):
     final_text = line
@@ -177,9 +178,10 @@ def link_image_conversion(line, meta, title, all_file, folder):
         else:
             final_text = transluction_note(final_text)
         final_text = heading_conversion(final_text, line, title, all_file, folder)
-        if not '\|' in final_text:
-            final_text = final_text.replace('|', '\|')
+        if not "\|" in final_text:
+            final_text = final_text.replace("|", "\|")
     return final_text
+
 
 def transluction_note(line):
     # If file (not image) start with "![[" : transluction with rmn-transclude (exclude

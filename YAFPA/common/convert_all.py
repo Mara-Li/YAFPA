@@ -9,7 +9,7 @@ from YAFPA.common import (
     file_checking as checkFile,
     conversion as convert,
     metadata as mt,
-    )
+)
 from YAFPA.common import global_value
 
 BASEDIR = global_value.BASEDIR
@@ -18,7 +18,7 @@ vault = global_value.vault
 
 def diff_file(file, folder, all_file, update=0):
     file_name = os.path.basename(file)
-    if checkFile.check_file(file_name, folder,all_file) == "EXIST":
+    if checkFile.check_file(file_name, folder, all_file) == "EXIST":
         if update == 1:  # Update : False / Don't check
             return False
         notes_path = Path(f"{folder}/{file_name}")
@@ -42,13 +42,14 @@ def diff_file(file, folder, all_file, update=0):
     else:
         return True  # Si le fichier existe pas, il peut pas être identique
 
+
 def exclude_folder(filepath):
-    #Exclude file if folder is in the YAML "exclude_folder" configuration (assets/script/exclude_folder.yml)
+    # Exclude file if folder is in the YAML "exclude_folder" configuration (assets/script/exclude_folder.yml)
     # True if excluded
     # False if not excluded
     config_folder = Path(f"{BASEDIR}/assets/script/exclude_folder.yml")
     if os.path.exists(config_folder):
-        with open(config_folder, 'r', encoding='utf-8') as config:
+        with open(config_folder, "r", encoding="utf-8") as config:
             try:
                 folder = yaml.safe_load(config)
             except yaml.YAMLError as exc:
@@ -62,18 +63,22 @@ def search_share(option=0, stop_share=1):
     filespush = []
     check = False
     folder = "_notes"
-    all_file=checkFile.all_file()
+    all_file = checkFile.all_file()
     share_key = global_value.share
     for sub, dirs, files in os.walk(Path(vault)):
         for file in files:
             filepath = sub + os.sep + file
-            if filepath.endswith(".md") and "excalidraw" not in filepath and not exclude_folder(filepath):
+            if (
+                filepath.endswith(".md")
+                and "excalidraw" not in filepath
+                and not exclude_folder(filepath)
+            ):
                 try:
                     yaml_front = frontmatter.load(filepath)
                     if "folder" in yaml_front.keys():
                         folder = yaml_front["folder"]
                     elif "category" in yaml_front.keys():
-                        cat = yaml_front["category"].split('/')
+                        cat = yaml_front["category"].split("/")
                         folder = cat[0]
                     folder = checkFile.check_folder(folder)
                     if share_key in yaml_front.keys() and yaml_front[share_key] is True:
@@ -87,7 +92,9 @@ def search_share(option=0, stop_share=1):
                                 update = 0
                             if diff_file(filepath, folder, all_file, update):
                                 checkFile.delete_file(filepath, folder)
-                                contents = convert.file_convert(filepath, folder, all_file)
+                                contents = convert.file_convert(
+                                    filepath, folder, all_file
+                                )
                                 check = convert.file_write(filepath, contents, folder)
                             else:
                                 check = convert.file_write(filepath, "0", folder)
@@ -159,7 +166,7 @@ def convert_all(delopt=False, git=False, force=False, stop_share=0):
         if git is False:
             if len(new_files) == 1:
                 commit = "".join(new_files)
-                md = commit[commit.find(':')+2:commit.rfind('in')-1]
+                md = commit[commit.find(":") + 2 : commit.rfind("in") - 1]
                 convert.clipboard(md, priv)
             commit = f"Updated : \n {commit}"
             global_value.git_push(commit)

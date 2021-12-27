@@ -9,6 +9,7 @@ from YAFPA.common import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
 
+
 def code_blocks(start_list, end_list):
     start_bug = []
     end_bug = []
@@ -23,10 +24,14 @@ def code_blocks(start_list, end_list):
         for j in end_bug:
             if i < j:
                 merged.append((i, j))
-    no_bug = [(x, y) for x, y in zip_longest(start_list, end_list, fillvalue=-1) if
-              x != -1 and x < y]
+    no_bug = [
+        (x, y)
+        for x, y in zip_longest(start_list, end_list, fillvalue=-1)
+        if x != -1 and x < y
+    ]
     merged = no_bug + merged
     return merged
+
 
 def admonition_logo(type, line):
     admonition = {
@@ -60,11 +65,11 @@ def admonition_logo(type, line):
         "quote": "🗨️",
         "cite": "🗨️",
     }
-    custom={}
+    custom = {}
     admonition_custom = False
-    if os.path.exists( Path(f"{BASEDIR}/assets/script/custom_admonition.yml")):
-        admonition_custom =  Path(f"{BASEDIR}/assets/script/custom_admonition.yml")
-    elif os.path.exists( Path(f"{BASEDIR}/custom_admonition.yml")):
+    if os.path.exists(Path(f"{BASEDIR}/assets/script/custom_admonition.yml")):
+        admonition_custom = Path(f"{BASEDIR}/assets/script/custom_admonition.yml")
+    elif os.path.exists(Path(f"{BASEDIR}/custom_admonition.yml")):
         admonition_custom = Path(f"{BASEDIR}/custom_admonition.yml")
 
     if admonition_custom:
@@ -87,7 +92,7 @@ def admonition_logo(type, line):
         admo_type = type.title()
 
     if line == "":
-        title = "**" + logo + ' <u>' + admo_type + '</u>' + "**{: .title}  \n"
+        title = "**" + logo + " <u>" + admo_type + "</u>" + "**{: .title}  \n"
     else:
         title = "**" + logo + " " + line + "**{: .title}  \n"
     return title
@@ -151,7 +156,7 @@ def admonition_trad(file_data):
         if re.search("[`?!]{3}( ?)\w+(.*)", file_data[i]):
             start = i
             start_list.append(start)
-        if re.match("^```$", file_data[i]) or re.match("--- admonition", file_data[i]) :
+        if re.match("^```$", file_data[i]) or re.match("--- admonition", file_data[i]):
             end = i
             end_list.append(end)
     merged = code_blocks(start_list, end_list)
@@ -173,7 +178,7 @@ def admonition_trad(file_data):
                 title = title.group(2)
             first_block = re.search("ad-(\w+)", file_data[ad_start])
             if first_block:
-                file_data[ad_end] = '  \n'
+                file_data[ad_end] = "  \n"
             adm_type_code = first_block.group().replace("ad-", "")
             if adm_type_code not in adm_list:
                 first_block = "ad-note"
@@ -186,7 +191,6 @@ def admonition_trad(file_data):
             file_data[ad_start] = re.sub(
                 "[`!?]{3}( ?)ad-(.*)", first_block, file_data[ad_start]
             )
-
 
             for i in range(ad_start, ad_end):
                 file_data[i] = admonition_trad_content(file_data[i], type)

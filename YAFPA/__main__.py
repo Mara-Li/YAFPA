@@ -81,10 +81,12 @@ def main():
         return
 
     if not args.keep:
-        info=check.delete_not_exist()
+        info = check.delete_not_exist()
         if len(info) > 1:
-            info_str='\n -'.join(info)
-            print(f'[{datetime.now().strftime("%H:%M:%S")}] 🗑️ Delete from blog:\n{info_str}')
+            info_str = "\n -".join(info)
+            print(
+                f'[{datetime.now().strftime("%H:%M:%S")}] 🗑️ Delete from blog:\n{info_str}'
+            )
         elif len(info) == 1:
             info_str = info[0]
             print(f'🗑️ Delete "{info_str}" from blog')

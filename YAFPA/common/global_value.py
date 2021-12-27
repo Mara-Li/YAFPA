@@ -31,7 +31,7 @@ try:
     BASEDIR = Path(env["blog_path"]).expanduser()
     vault = Path(env["vault"]).expanduser()
     web = env["blog"]
-    share = env['share']
+    share = env["share"]
 except KeyError:
     with open(env_path) as f:
         vault_str = "".join(f.readlines(1)).replace("vault=", "").rstrip()
@@ -40,7 +40,7 @@ except KeyError:
         vault = Path(vault_str)
         BASEDIR = Path(basedir_str)
         web = "".join(f.readlines(3)).replace("blog=", "")
-        share = "".join(f.readlines(4)).replace('share=', "")
+        share = "".join(f.readlines(4)).replace("share=", "")
     if len(vault_str) == 0 or len(basedir_str) == 0 or len(web) == 0:
         print("Please provide a valid path for all config items")
         exit(1)

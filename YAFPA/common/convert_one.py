@@ -17,7 +17,7 @@ def convert_one(ori, delopt, git):
         priv = yaml_front["folder"]
         priv = checkFile.check_folder(priv)
     elif "category" in yaml_front.keys():
-        cat = yaml_front['category'].split("/")
+        cat = yaml_front["category"].split("/")
         priv = cat[0]
         priv = checkFile.check_folder(priv)
     else:
