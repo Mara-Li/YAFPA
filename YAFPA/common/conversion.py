@@ -209,7 +209,7 @@ def file_convert(file, folder, all_file, option=0):
             ):  # New line when using "\" in obsidian file
                 final_text = "  \n"
             final.append(final_text)
-    if meta.metadata["category"]:
+    if "category" in meta.metadata:
         category = meta.metadata["category"].split("/")
         if len(category) > 1:
             meta.metadata["category"] = category[1]
