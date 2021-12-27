@@ -78,8 +78,16 @@ def search_share(option=0, stop_share=1):
                     if "folder" in yaml_front.keys():
                         folder = yaml_front["folder"]
                     elif "category" in yaml_front.keys():
-                        cat = yaml_front["category"].split("/")
-                        folder = cat[0]
+                        if (
+                            yaml_front["category"] is not None
+                            and yaml_front["category"] != False
+                        ):
+                            cat = yaml_front["category"].split("/")
+                            folder = cat[0]
+                        else:
+                            folder = "_notes"
+                    else:
+                        folder = "_notes"
                     folder = checkFile.check_folder(folder)
                     if share_key in yaml_front.keys() and yaml_front[share_key] is True:
                         if option == 1:

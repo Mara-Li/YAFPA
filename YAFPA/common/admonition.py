@@ -34,6 +34,8 @@ def code_blocks(start_list, end_list):
 
 
 def admonition_logo(type, line):
+    logo = "🖊️"
+    admo_type = "notes"
     admonition = {
         "note": "🖊️",
         "seealso": "🖊️",

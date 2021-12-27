@@ -90,7 +90,11 @@ def all_file():
 
 
 def check_file(filepath, folder, all_file):
-    post_file = all_file[os.path.basename(Path(folder))]
+    try:
+        post_file = all_file[os.path.basename(Path(folder))]
+    except KeyError:
+        print(f"There is a folder error in {os.path.basename(filepath)}")
+        exit(1)
     post_file = [os.path.basename(i) for i in post_file]
     if filepath in post_file:
         return "EXIST"

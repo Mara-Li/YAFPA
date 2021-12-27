@@ -52,6 +52,7 @@ def clipboard(filepath, folder):
 def file_write(file, contents, folder):
     file_name = os.path.basename(file)
     meta = frontmatter.load(file)
+    share = settings.share
     if contents == "":
         return False
     else:
@@ -64,7 +65,7 @@ def file_write(file, contents, folder):
             mt.frontmatter_check(file_name, folder)
             return True
         else:
-            if not meta["share"] or meta["share"] == False:
+            if not meta[share] or meta[share] == False:
                 check.delete_file(file, folder)
             return False
 
@@ -210,11 +211,12 @@ def file_convert(file, folder, all_file, option=0):
                 final_text = "  \n"
             final.append(final_text)
     if "category" in meta.metadata:
-        category = meta.metadata["category"].split("/")
-        if len(category) > 1:
-            meta.metadata["category"] = category[1]
-        else:
-            meta.metadata["category"] = category[0]
+        if meta.metadata["category"]:
+            category = meta.metadata["category"].split("/")
+            if len(category) > 1:
+                meta.metadata["category"] = category[1]
+            else:
+                meta.metadata["category"] = category[0]
     meta_list = [f"{k}: {v}  \n" for k, v in meta.metadata.items()]
     meta_list.insert(0, "---  \n")
     meta_list.insert(len(meta_list) + 1, "---  \n")

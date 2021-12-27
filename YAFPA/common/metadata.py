@@ -77,12 +77,15 @@ def update_frontmatter(file, folder, share=0, link=1):
             emojiz = re.search(r"\\U\w+", update)
             emojiz = emojiz.group().strip()
             raw = r"{}".format(emojiz)
-            convert_emojiz = (
-                raw.encode("ascii")
-                .decode("unicode_escape")
-                .encode("utf-16", "surrogatepass")
-                .decode("utf-16")
-            )
-            update = re.sub(r'"\\U\w+"', convert_emojiz, update)
+            try:
+                convert_emojiz = (
+                    raw.encode("ascii")
+                    .decode("unicode_escape")
+                    .encode("utf-16", "surrogatepass")
+                    .decode("utf-16")
+                )
+                update = re.sub(r'"\\U\w+"', convert_emojiz, update)
+            except UnicodeEncodeError:
+                pass
         f.write(update)
     return
