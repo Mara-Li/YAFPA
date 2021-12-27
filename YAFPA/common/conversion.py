@@ -10,7 +10,7 @@ from YAFPA.common import (
     link_conversion as links,
     admonition as adm,
     metadata as mt,
-    )
+)
 from YAFPA.common import global_value as settings
 
 BASEDIR = Path(settings.BASEDIR)
@@ -87,10 +87,17 @@ def convert_hashtags(final_text):
     for i in range(0, len(token)):
         if token[i] in css:
             final_text = final_text.replace(token[i], "")
-            if final_text.startswith('#'):
-                heading = re.findall('#', final_text)
-                heading = ''.join(heading)
-                IAL = heading + " **" + final_text.replace('#', '').strip() + "**{: " + token[i] + "}  \n"
+            if final_text.startswith("#"):
+                heading = re.findall("#", final_text)
+                heading = "".join(heading)
+                IAL = (
+                    heading
+                    + " **"
+                    + final_text.replace("#", "").strip()
+                    + "**{: "
+                    + token[i]
+                    + "}  \n"
+                )
             else:
                 IAL = "**" + final_text.strip() + "**{: " + token[i] + "}  \n"
             final_text = final_text.replace(final_text, IAL)
@@ -130,15 +137,21 @@ def file_convert(file, folder, all_file, option=0):
     lines = adm.admonition_trad(lines)
     for ln in lines:
         final_text = ln.replace("  \n", "\n")
-        if not final_text.strip().endswith("%%") and not final_text.strip().startswith("%%"):
-            #skip comment
+        if not final_text.strip().endswith("%%") and not final_text.strip().startswith(
+            "%%"
+        ):
+            # skip comment
             final_text = final_text.replace("\n", "  \n")
-            final_text = links.link_image_conversion(final_text, meta, os.path.basename(file), all_file, folder)
+            final_text = links.link_image_conversion(
+                final_text, meta, os.path.basename(file), all_file, folder
+            )
 
-            if not '`' in final_text:
+            if not "`" in final_text:
                 final_text = re.sub("\%{2}(.*)\%{2}", "", final_text)
 
-            if re.search(r"\\U\w+", final_text) and not "Users" in final_text: #Fix emoji if bug because of frontmatter
+            if (
+                re.search(r"\\U\w+", final_text) and not "Users" in final_text
+            ):  # Fix emoji if bug because of frontmatter
                 emojiz = re.search(r"\\U\w+", final_text)
                 emojiz = emojiz.group().strip().replace('"', "")
                 convert_emojiz = (
@@ -153,12 +166,13 @@ def file_convert(file, folder, all_file, option=0):
                 # Admonition space
                 final_text = final_text.replace("  \n", "\n")
 
-            
             elif re.search("```mermaid\s+", final_text):
                 # Convert to jekyll-support mermaid format
                 final_text = final_text.replace("```mermaid", "```mermaid!")
 
-            if re.search("#\w+", final_text) and not re.search("(`|\[{2}|\()(.*)#(.*)(`|\]{2}|\))", final_text):
+            if re.search("#\w+", final_text) and not re.search(
+                "(`|\[{2}|\()(.*)#(.*)(`|\]{2}|\))", final_text
+            ):
                 # Hashtags
                 final_text = convert_hashtags(final_text)
 
@@ -186,18 +200,21 @@ def file_convert(file, folder, all_file, option=0):
             elif re.search("==(.*)==", final_text):
                 final_text = re.sub("==", "[[", final_text, 1)
                 final_text = re.sub("( ?)==", "::highlight]] ", final_text, 2)
-            elif re.search("(\[{2}|\().*\.(png|jpg|jpeg|gif)", final_text):  # CONVERT IMAGE
+            elif re.search(
+                "(\[{2}|\().*\.(png|jpg|jpeg|gif)", final_text
+            ):  # CONVERT IMAGE
                 final_text = links.move_img(final_text)
             elif re.fullmatch(
                 "\\\\", final_text.strip()
             ):  # New line when using "\" in obsidian file
                 final_text = "  \n"
             final.append(final_text)
-    category = meta.metadata['category'].split('/')
-    if len(category) > 1:
-        meta.metadata['category'] = category[1]
-    else:
-        meta.metadata['category'] = category[0]
+    if meta.metadata["category"]:
+        category = meta.metadata["category"].split("/")
+        if len(category) > 1:
+            meta.metadata["category"] = category[1]
+        else:
+            meta.metadata["category"] = category[0]
     meta_list = [f"{k}: {v}  \n" for k, v in meta.metadata.items()]
     meta_list.insert(0, "---  \n")
     meta_list.insert(len(meta_list) + 1, "---  \n")
