@@ -1,3 +1,8 @@
+⚠️THIS SCRIPT IS NO LONGER MAINTENED. PLEASE [READ MORE ON OBSIDIAN FORUM](https://forum.obsidian.md/t/yet-another-free-publish-alternative-yafpa/23608/19?u=mara-li)
+
+[PLEASE CHECK THE NEW VERSION BASED ON MKDOCS](https://pypi.org/project/obs2mk/)
+
+
 [![GitHub license](https://img.shields.io/github/license/Mara-Li/YAFPA-python)](https://github.com/Mara-Li/YAFPA-python)
 [![PyPI](https://img.shields.io/pypi/v/YAFPA)](https://pypi.org/project/yafpa/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/YAFPA)
